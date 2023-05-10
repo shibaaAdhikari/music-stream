@@ -43,7 +43,7 @@ const SidenavBar = ({ children }) => {
         style={{
           height: "100vh",
           backgroundColor: "rgb(0,0,0)",
-          width: "15%",
+          width: "17%",
         }}
         className="align-items-start d-flex justify-content-start fixed-top"
       >
@@ -65,7 +65,7 @@ const SidenavBar = ({ children }) => {
           </NavItem>
         ))}
       </Nav>
-      <main>{children}</main>
+      {/* <main>{children}</main> */}
     </div>
   );
 };
