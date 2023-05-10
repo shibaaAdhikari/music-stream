@@ -48,3 +48,12 @@
 .content-section {
   width: 84%;
 }
+.cardgroup:hover {
+  background-color: #44454681;
+}
+.container {
+  width: 25%;
+}
+.InputFIeld {
+  width: 25%;
+}

@@ -13,23 +13,23 @@ import {
 const Cardss = () => {
   return (
     <>
-      <CardGroup style={{ width: "12rem" }}>
+      <CardGroup style={{ width: "12rem" }} className="cardgroup">
         <Card
           style={{
             backgroundColor: "rgb(24,24,24)",
             borderRadius: "7px",
-
             height: "12rem",
           }}
-          className="card"
+          className="cards"
         >
           <CardImg
             alt="Card image cap"
             src="https://picsum.photos/318/180"
             top
             style={{ width: "90%", margin: "10px", borderRadius: "7px" }}
+            className="cardImg"
           />
-          <CardBody>
+          <CardBody className="cardbody">
             <CardTitle tag="h5" style={{ color: "white" }}>
               Card title
             </CardTitle>
@@ -43,14 +43,6 @@ const Cardss = () => {
           </CardBody>
         </Card>
       </CardGroup>
-      <style>
-        {`
-        .card:hover {
-          background-color: gray;
-          cursor: pointer;
-        }
-      `}
-      </style>
     </>
   );
 };

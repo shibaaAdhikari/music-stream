@@ -13,8 +13,7 @@ const CardContainer = (props) => {
           </Link>
         </p>
       </div>
-      <div className="d-flex gap-4 mx-4 mt-3">
-        <Cardss />
+      <div className="d-flex gap-3 md-4 sm-3">
         <Cardss />
         <Cardss />
         <Cardss />

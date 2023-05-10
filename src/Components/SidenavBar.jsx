@@ -45,20 +45,20 @@ const SidenavBar = ({ children }) => {
           backgroundColor: "rgb(0,0,0)",
           width: "17%",
         }}
-        className="align-items-start d-flex justify-content-start fixed-top"
+        className="align-items-start d-flex justify-content-start fixed-top "
       >
         <Media>
           <Media object src={Spotify} alt="My Image" style={{ width: "75%" }} />
         </Media>
         {menuItems.map((item, index) => (
-          <NavItem key={index} className=" flex-column d-flex text-start">
+          <NavItem key={index} className=" flex-column d-flex text-start mt-3">
             <NavLink
               href={item.path}
               style={{ color: "white" }}
               className="fs-5 mb-2"
             >
               <div className="d-flex">
-                <div style={{ marginRight: "0.5rem" }}>{item.icon}</div>
+                <div style={{ marginRight: "1rem" }}>{item.icon}</div>
                 <div lassName="link_text">{item.name}</div>
               </div>
             </NavLink>

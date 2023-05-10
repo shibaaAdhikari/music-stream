@@ -3,6 +3,7 @@ import { Card, Col, Row } from "reactstrap";
 import Cardss from "../../Components/Cardss";
 import SearchBar from "../../Components/SearchBar";
 import CardContainer from "../../Components/CardContainer/CardContainer";
+import Footer from "../Footer/Footer";
 
 const Home = () => {
   return (
@@ -10,6 +11,7 @@ const Home = () => {
       <SearchBar />
       <CardContainer containerTitle={"Focus"} />
       <CardContainer containerTitle={"SpotifyPlaylist"} />
+      <Footer />
     </div>
   );
 };
