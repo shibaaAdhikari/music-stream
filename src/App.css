@@ -36,9 +36,15 @@
     transform: rotate(360deg);
   }
 }
-.navBar {
+/* .navBar {
   display: flex;
 }
 .browserRouter {
   display: flex;
+} */
+.sidebar-section {
+  width: 16%;
+}
+.content-section {
+  width: 84%;
 }
