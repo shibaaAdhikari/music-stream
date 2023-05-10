@@ -11,6 +11,8 @@ import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import spotifyLogo from "../Assests/spotify.png";
 import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
+import { Row, Col } from "reactstrap";
 
 const Sidebar = ({ children }) => {
   const menuItems = [
@@ -42,16 +44,27 @@ const Sidebar = ({ children }) => {
   ];
   return (
     <>
-      <div className="navBar">
+      <div>
+        {/* <Row className="navBar p-0 m-0">
+          <Col xs="10"> */}
         <Navbar
-          bg="dark"
+          // bg="dark"
           expand="lg"
-          style={{ width: "15%", height: "100vh" }}
-          className="align-items-start d-flex justify-content-start "
+          style={{
+            height: "100vh",
+            backgroundColor: "rgb(0,0,0)",
+            width: "1%",
+          }}
+          className="align-items-start d-flex justify-content-start fixed-top"
         >
-          <Container className=" flex-column align-item-start d-flex d-flex align-items-start  ">
+          <Container className=" flex-column  d-flex d-flex align-items-start  ">
             <div>
-              <Image src={spotifyLogo} fluid className="mb-3" />
+              <Image
+                src={spotifyLogo}
+                fluid
+                className="mb-3"
+                style={{ width: "75%" }}
+              />
             </div>
             {menuItems.map((item, index) => (
               <Nav className=" flex-column d-flex text-start">
@@ -72,7 +85,14 @@ const Sidebar = ({ children }) => {
             ))}
           </Container>
         </Navbar>
-        <main>{children}</main>
+        {/* </Col> */}
+        {/* <Col xs="10"> */}
+        {/* <main> */}
+        {/* <SearchBar /> */}
+        {/* {children} */}
+        {/* </main> */}
+        {/* </Col> */}
+        {/* </Row> */}
       </div>
     </>
   );
