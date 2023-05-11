@@ -1,0 +1,7 @@
+.card-song:hover {
+  background-color: rgba(255, 255, 255, 0.233) !important;
+}
+.playButton {
+  /* width: 25%; */
+  /* background-color: green; */
+}

@@ -20,8 +20,8 @@ const SearchBar = () => {
         dark
       >
         <NavbarBrand
-          style={{ width: "5%", textAlign: "end" }}
-          className="d-flex gap-3 mx-5"
+          style={{ width: "15%", textAlign: "end" }}
+          className="d-flex gap-3 mx-5 justify-content-end  "
         >
           <div>
             <MdArrowBackIosNew />
@@ -32,9 +32,20 @@ const SearchBar = () => {
         </NavbarBrand>
         <NavbarBrand className="d-flex">
           <p
-            style={{ color: "rgb(249,249,249)", cursor: "pointer" }}
-            className="mx-4 mt-2"
+            style={{
+              color: "rgb(249,249,249)",
+              cursor: "pointer",
+            }}
+            className="mx-4  fs-5 mt-2"
             onClick={navigateSignup}
+            onMouseEnter={(e) => {
+              e.target.style.color = "white";
+              e.target.style.animationFillMode = "forwards";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.color = "rgb(179,179,167)";
+              e.target.style.animationFillMode = "none  ";
+            }}
           >
             Signup
           </p>

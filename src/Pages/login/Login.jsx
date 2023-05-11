@@ -10,6 +10,10 @@ import {
 } from "reactstrap";
 import "./Login.css";
 import Spotify from "../../Assests/spotify.png";
+import LoginButton from "../../Components/LoginButton";
+import { IoLogoFacebook } from "react-icons/io";
+import { FcGoogle } from "react-icons/fc";
+import { AiOutlineApple } from "react-icons/ai";
 
 const Login = () => {
   return (
@@ -34,24 +38,15 @@ const Login = () => {
           </div>
           <div>
             <Form className="d-flex flex-column">
-              <Button
-                className="InputField align-contents-center rounded-pill mb-2 p-2"
-                style={{ backgroundColor: "black" }}
-              >
-                Sign up with Google
-              </Button>
-              <Button
-                className="InputField rounded-pill mb-2 p-2"
-                style={{ backgroundColor: "black" }}
-              >
-                Continue with facebook
-              </Button>
-              <Button
-                className="InputField rounded-pill mb-3 p-2"
-                style={{ backgroundColor: "black" }}
-              >
-                COntinue with apple
-              </Button>
+              <LoginButton icon={<FcGoogle />} title="Continue with Google" />
+              <LoginButton
+                icon={<IoLogoFacebook />}
+                title="Continue with facebook"
+              />
+              <LoginButton
+                icon={<AiOutlineApple />}
+                title="Continue with Apple"
+              />
             </Form>
           </div>
           <hr style={{ color: "white" }}></hr>
@@ -81,21 +76,21 @@ const Login = () => {
               />
             </FormGroup>
           </div>
-          <div className="d-flex flex-column">
+          <div className="d-flex flex-column mb-5">
             <Button
-              className="  rounded-pill mb-3 p-2"
-              style={{ backgroundColor: "darkgreen" }}
+              className=" text-dark rounded-pill mb-3 p-2"
+              style={{ backgroundColor: "rgb(31,223,100)" }}
             >
-              login
+              Login
             </Button>
-            <a href="" className="text-center" alt="forgot password">
+            <a href="" className="text-center text-light" alt="forgot password">
               Forgot your password
             </a>
             <hr style={{ color: "white" }}></hr>
-            <h6 className="text-center">
+            <h6 className="text-center" style={{ color: "rgb(167,164,124)" }}>
               Don't have an account?{" "}
               <span>
-                <a href="#" alt="signIn">
+                <a href="#" alt="signIn" className="text-light mx-2">
                   Sign up for spotify
                 </a>
               </span>

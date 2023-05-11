@@ -1,48 +1,90 @@
 import React from "react";
-import {
-  CardGroup,
-  Card,
-  CardImg,
-  CardBody,
-  CardTitle,
-  CardText,
-  CardSubtitle,
-  Button,
-} from "reactstrap";
+import { CardGroup, Card, CardImg, CardTitle, CardSubtitle } from "reactstrap";
+import { FaSpotify } from "react-icons/fa";
+import { FaPlayCircle } from "react-icons/fa";
+import { useState } from "react";
+import "./Cardss.css";
+const Cardss = ({ title, image, descriptions }) => {
+  const [isHovered, setIsHovered] = useState(false);
 
-const Cardss = () => {
+  const handleMouseEnter = () => {
+    setIsHovered(true);
+  };
+
+  const handleMouseLeave = () => {
+    setIsHovered(false);
+  };
   return (
     <>
-      <CardGroup style={{ width: "12rem" }} className="cardgroup">
-        <Card
+      <div
+        className={`card-container ${isHovered ? "hovered" : ""}`}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        <CardGroup
           style={{
-            backgroundColor: "rgb(24,24,24)",
-            borderRadius: "7px",
-            height: "12rem",
+            width: "12rem",
+            cursor: "pointer",
           }}
-          className="cards"
         >
-          <CardImg
-            alt="Card image cap"
-            src="https://picsum.photos/318/180"
-            top
-            style={{ width: "90%", margin: "10px", borderRadius: "7px" }}
-            className="cardImg"
-          />
-          <CardBody className="cardbody">
-            <CardTitle tag="h5" style={{ color: "white" }}>
-              Card title
+          <Card
+            style={{
+              borderRadius: "7px",
+              height: "15rem",
+              backgroundColor: "rgb(19,19,19)",
+            }}
+            className="card-song "
+          >
+            <CardImg
+              alt="Card image cap"
+              src={image}
+              top
+              style={{
+                width: "80%",
+                height: "15vh",
+                margin: " 0 auto",
+                marginTop: "10px",
+                borderRadius: "7px",
+                cursor: "pointer",
+              }}
+              className="cardImg custom-card-img bg-white"
+            />
+
+            <CardTitle
+              tag="h5"
+              style={{ color: "white", position: "absolute" }}
+              className="cardgroup"
+            >
+              {descriptions}
+              <div>
+                <FaSpotify />
+              </div>
+              {isHovered && (
+                <div className="playButton">
+                  <FaPlayCircle
+                    style={{
+                      fontSize: "45px",
+                      color: "green",
+                      position: "relative",
+                      left: "135px",
+                      // top: "50px",
+                      bottom: "-70px",
+                    }}
+                  />
+                </div>
+              )}
             </CardTitle>
+
             <CardSubtitle
-              className="mb-2 text-muted"
+              className="mb-2 text-muted cardgroup"
               tag="h6"
               style={{ color: "rgb(167,167,167)" }}
             >
-              Card subtitle
+              {title}
             </CardSubtitle>
-          </CardBody>
-        </Card>
-      </CardGroup>
+          </Card>
+        </CardGroup>
+      </div>
     </>
   );
 };

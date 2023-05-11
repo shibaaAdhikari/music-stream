@@ -42,18 +42,8 @@
 .browserRouter {
   display: flex;
 } */
-.sidebar-section {
-  width: 16%;
-}
-.content-section {
-  width: 84%;
-}
-.cardgroup:hover {
-  background-color: #44454681;
-}
-.container {
-  width: 25%;
-}
-.InputFIeld {
-  width: 25%;
+
+.custom-card-img {
+  /* background-color: #3280ce81; */
+  /* z-index: -1; */
 }

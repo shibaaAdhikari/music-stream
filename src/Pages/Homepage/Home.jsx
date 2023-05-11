@@ -8,10 +8,10 @@ import Footer from "../Footer/Footer";
 const Home = () => {
   return (
     <div className="container-fluid   justify-content-center">
-      <SearchBar />
+      {/* <SearchBar /> */}
       <CardContainer containerTitle={"Focus"} />
       <CardContainer containerTitle={"SpotifyPlaylist"} />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 };
