@@ -1,20 +1,18 @@
 import React from "react";
 import { Route, Routes } from "react-router";
-import SidenavBar from "./SidenavBar";
-import Home from "../Pages/Homepage/Home";
-import Features from "../Pages/Features/Features";
+
+import Login from "../Pages/login/Login";
+import Signup from "../Pages/SignuP/Signup";
 
 const Routing = () => {
   return (
     <div className="screens-container">
-      <SidenavBar>
-        <div className="screens-section-container">
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/Features" element={<Features />} />
-          </Routes>
-        </div>
-      </SidenavBar>
+      <div className="screens-section-container">
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route path="/Features" element={<Signup />} />
+        </Routes>
+      </div>
     </div>
   );
 };

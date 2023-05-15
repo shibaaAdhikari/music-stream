@@ -4,7 +4,8 @@ import { FaSpotify } from "react-icons/fa";
 import { FaPlayCircle } from "react-icons/fa";
 import { useState } from "react";
 import "./Cardss.css";
-const Cardss = ({ title, image, descriptions }) => {
+
+const Cardss = ({ title, image, descriptions, album }) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -30,7 +31,7 @@ const Cardss = ({ title, image, descriptions }) => {
           <Card
             style={{
               borderRadius: "7px",
-              height: "15rem",
+              height: "17rem",
               backgroundColor: "rgb(19,19,19)",
             }}
             className="card-song "
@@ -60,27 +61,44 @@ const Cardss = ({ title, image, descriptions }) => {
                 <FaSpotify />
               </div>
               {isHovered && (
-                <div className="playButton">
+                <div className="playButtons ">
                   <FaPlayCircle
                     style={{
                       fontSize: "45px",
                       color: "green",
                       position: "relative",
                       left: "135px",
-                      // top: "50px",
                       bottom: "-70px",
+                      backgroundColor: "black",
                     }}
+                    className="rounded-circle"
                   />
                 </div>
               )}
             </CardTitle>
 
             <CardSubtitle
-              className="mb-2 text-muted cardgroup"
+              className="mb-2 text-muted cardgroup text-light"
               tag="h6"
-              style={{ color: "rgb(167,167,167)" }}
+              style={{
+                color: "wheat",
+                marginTop: "10px",
+                textAlign: "center",
+              }}
             >
               {title}
+            </CardSubtitle>
+
+            <CardSubtitle
+              className="mb-2 text-muted cardgroup"
+              tag="h6"
+              style={{
+                color: "rgb(167,167,167)",
+                marginTop: "10px",
+                textAlign: "center",
+              }}
+            >
+              {album}
             </CardSubtitle>
           </Card>
         </CardGroup>

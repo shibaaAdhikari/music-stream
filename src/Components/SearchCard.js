@@ -20,10 +20,10 @@ const SearchCard = ({ title, image }) => {
             height: "18vh",
             borderRadius: "15px",
           }}
-          className="mt-5 "
+          className="mt-5 searchCard "
         >
           <h4 className="mx-2 pt-3 ">{title}</h4>
-          <div>
+          <div className="searchImage">
             <img src={image} alt="img" className="img-fluid" />
           </div>
         </div>

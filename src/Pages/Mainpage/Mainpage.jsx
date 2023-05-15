@@ -1,31 +1,26 @@
 import React from "react";
 import SidenavBar from "../../Components/SidenavBar";
-import Home from "../Homepage/Home";
-import { Routes, Route, useNavigate, Outlet } from "react-router-dom";
-import Features from "../Features/Features";
+import { Outlet } from "react-router-dom";
+import SearchBar from "../../Components/SearchBar";
+import Footer from "../Footer/Footer";
 
 const Mainpage = () => {
   return (
-    <div className="d-flex">
-      <div className="sidebar-section">
-        <SidenavBar />
+    <>
+      <SearchBar />
+      <div className="d-flex ">
+        <div className="sidebar-section bg-white">
+          <SidenavBar />
+        </div>
+        <div
+          className="content-section "
+          style={{ width: "100%", marginLeft: "15%" }}
+        >
+          <Outlet />
+        </div>
       </div>
-      <div className="content-section">
-        <Outlet />
-      </div>
-    </div>
-
-    // <div className="d-flex">
-    //   <div className="sidebar-section">
-    //     <SidenavBar />
-    //   </div>
-    //   <div className="content-section">
-    //     <Routes>
-    //       <Route path="/" element={<Home />} />
-    //       <Route path="/Features" element={<Features />} />
-    //     </Routes>
-    //   </div>
-    // </div>
+      <Footer />
+    </>
   );
 };
 

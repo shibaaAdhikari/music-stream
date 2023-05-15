@@ -1,17 +1,19 @@
 import React from "react";
-import { Card, Col, Row } from "reactstrap";
-import Cardss from "../../Components/Cardss";
-import SearchBar from "../../Components/SearchBar";
 import CardContainer from "../../Components/CardContainer/CardContainer";
-import Footer from "../Footer/Footer";
+import { useRecoilValue } from "recoil";
+import { PlayListSelector } from "../../Components/Recoil/selector";
+import { musics } from "../../Components/Recoil/selector";
 
 const Home = () => {
+  const playlistData = useRecoilValue(PlayListSelector);
+  const dummyMusics = useRecoilValue(musics);
   return (
-    <div className="container-fluid   justify-content-center">
-      {/* <SearchBar /> */}
-      <CardContainer containerTitle={"Focus"} />
-      <CardContainer containerTitle={"SpotifyPlaylist"} />
-      {/* <Footer /> */}
+    <div className="container-fluid  justify-content-center">
+      <CardContainer containerTitle={"Focus"} musics={dummyMusics} />
+      <CardContainer
+        containerTitle={"Spotify Playlist"}
+        playlistData={playlistData}
+      />
     </div>
   );
 };

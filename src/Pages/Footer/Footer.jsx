@@ -5,54 +5,75 @@ import { BsFacebook } from "react-icons/bs";
 
 const Footer = () => {
   return (
-    <div className="d-flex justify-content-between  ">
-      <div className="d-flex mx-5 mt-5 gap-5">
+    <div
+      className="d-flex justify-content-around mb-5 mt-5"
+      style={{ width: "100%" }}
+    >
+      <div
+        className="d-flex justify-content-between   mt-5 "
+        style={{ width: "40%", marginLeft: "10%", cursor: "pointer" }}
+      >
         <div>
           <p className="fw-bold text-light">Company</p>
-          <a
-            href="https://www.spotify.com/np-en/about-us/contact/"
-            style={{ color: "rgb(167,165,128)" }}
-          >
-            About
-          </a>
-          <p style={{ color: "rgb(167,165,128)" }}>Jobs</p>
-          <p style={{ color: "rgb(167,165,128)" }}>For the record</p>
-          <p></p>
+          <p style={{ color: "white" }}>About</p>
+          <p style={{ color: "white" }}>Jobs</p>
+          <p style={{ color: "white" }}>For the record</p>
         </div>
         <div>
           <p className="fw-bold text-light">Communities</p>
-          <a
-            href="https://www.spotify.com/np-en/about-us/contact/"
-            style={{ color: "rgb(167,165,128)" }}
-          >
-            For Artists
-          </a>
-          <p style={{ color: "rgb(167,165,128)" }}>Developers</p>
-          <p style={{ color: "rgb(167,165,128)" }}>Advertising</p>
-          <p alt="vendor" style={{ color: "rgb(167,165,128)" }}>
-            Investors
-          </p>
+          <p style={{ color: "white" }}>For Artists</p>
+          <p style={{ color: "white" }}>Developers</p>
+          <p style={{ color: "white" }}>Advertising</p>
+          <p style={{ color: "white" }}>Investors</p>
+          <p style={{ color: "white" }}>Vendors</p>
+          <p style={{ color: "white" }}>Spotify for Work</p>
         </div>
         <div>
           <p className="fw-bold text-light">Useful links</p>
-          <p style={{ color: "rgb(167,165,128)" }}>Supports</p>
-          <p style={{ color: "rgb(167,165,128)" }}>Supports</p>
-          <p style={{ color: "rgb(167,165,128)" }}>Supports</p>
+          <p style={{ color: "white" }}>Free Mobile App</p>
         </div>
         <div>icons</div>
         <hr></hr>
       </div>
       <div style={{ color: "wheat" }} className="mt-5 d-flex gap-3 mx-5 ">
-        <div>
-          <AiOutlineInstagram />
+        <div
+          style={{
+            height: "40px",
+            width: "40px",
+            fontSize: "20px",
+            backgroundColor: "gray",
+            cursor: "pointer",
+          }}
+          className="rounded-circle text-center pt-1 socialMediaIcon "
+        >
+          <AiOutlineInstagram style={{ color: "white" }} />
         </div>
-        <div>
-          <CiTwitter />
+        <div
+          style={{
+            height: "40px",
+            width: "40px",
+            fontSize: "20px",
+            backgroundColor: "gray",
+            cursor: "pointer",
+          }}
+          className="rounded-circle text-center pt-1 socialMediaIcon "
+        >
+          <CiTwitter style={{ fontSize: "25px", color: "white" }} />
         </div>
-        <div>
-          <BsFacebook />
+        <div
+          style={{
+            height: "40px",
+            width: "40px",
+            fontSize: "20px",
+            backgroundColor: "gray",
+            cursor: "pointer",
+          }}
+          className="rounded-circle text-center pt-1 socialMediaIcon"
+        >
+          <BsFacebook style={{ fontSize: "25px", color: "white" }} />
         </div>
       </div>
+      {/* <hr></hr> */}
     </div>
   );
 };

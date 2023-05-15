@@ -7,24 +7,25 @@ import Login from "../src/Pages/login/Login";
 import Signup from "./Pages/SignuP/Signup";
 import Features from "./Pages/Features/Features";
 import Home from "./Pages/Homepage/Home";
-import SearchBar from "./Components/SearchBar";
-import Footer from "./Pages/Footer/Footer";
+
+import AlbumList from "./Components/AlbumList";
 
 function App() {
   return (
     <>
       <div>
-        <SearchBar />
+        <div></div>
         <Routes>
           <Route path="/" element={<Mainpage />}>
+            {/* <SearchBar /> */}
             <Route index element={<Home />}></Route>
             <Route path="/Features" element={<Features />}></Route>
+            <Route path="/Album/:id" element={<AlbumList />}></Route>
+            {/* <Footer /> */}
           </Route>
-
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Login" element={<Login />} />
         </Routes>
-        <Footer />
       </div>
     </>
   );
