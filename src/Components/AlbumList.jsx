@@ -13,12 +13,22 @@ const AlbumList = () => {
 
   return (
     <div>
-      <div>
+      <div
+        style={{
+          backgroundColor: "#33343b",
+          backgroundImage:
+            "linear-gradient(185deg, #33343b 0%, #465156 46%, #729ba6 100%)",
+          paddingBottom: "20px",
+          border: "1px solid",
+          borderTop: "10px solid",
+          backgroundClip: "padding-box",
+        }}
+      >
         <div>
           <SelectedMusic music={music} />
         </div>
         <div>
-          <div className="container-fluid  mt-4">
+          <div className="container-fluid  ">
             <AiFillPlayCircle
               style={{ fontSize: "60px", color: "green" }}
               className="playbutton"

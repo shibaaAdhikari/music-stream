@@ -1,18 +1,15 @@
 import React from "react";
-import images from "../../Assests/coverSong.jpeg";
+
 import { BsSpotify } from "react-icons/bs";
 const SelectedMusic = ({ music }) => {
-  console.log(music);
-  // console.log("selectedd music items");
-  // const { color } = music; // Destructure the color property from the music object
-  // console.log(music);
-
+  const { color, backgroundImage } = music;
   return (
     <div
-      className=" d-flex gap-4  p-3 m-0 container-fluid"
+      className=" d-flex  gap-5 p-3 m-0   "
       style={{
         width: "100%",
-        background: " linear-gradient(315deg, #000000 0%, #958e69 74%)",
+        background: `${color} `,
+        backgroundImage: `${backgroundImage}`,
       }}
     >
       <div>
@@ -24,21 +21,27 @@ const SelectedMusic = ({ music }) => {
         />
       </div>
       <div>
-        <p className="text-light">Playlist</p>
-        <h1 className="text-light fs-1  mb-5" style={{ fontWeight: "bolder" }}>
+        <p className="text-light mt-5">Playlist</p>
+        <h1
+          className="text-light fs-1 mt-5 mb-3"
+          style={{ fontWeight: "bolder", fontSize: "50px" }}
+        >
           {music.title}
           {/* musicTitle */}
         </h1>
         <h6 className="text-light mt-1">
-          {/* {music.artist} */}
+          {music.subTitle}
           {/* musicArtist */}
         </h6>
-        <BsSpotify
-          style={{ color: "green", fontSize: "24px", cursor: "pointer" }}
-        />
-        <span className="text-light mx-3">Spotify</span>
-        <span className="text-light mx-1">.7,70,722 likes</span>
-        <span className="text-light mx-1">.300 likes</span>
+
+        <div className="mt-5">
+          <BsSpotify
+            style={{ color: "green", fontSize: "24px", cursor: "pointer" }}
+          />
+          <span className="text-light mx-3">Spotify</span>
+          <span className="text-light mx-1">.7,70,722 likes</span>
+          <span className="text-light mx-1">.300 likes</span>
+        </div>
       </div>
     </div>
   );

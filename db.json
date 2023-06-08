@@ -3,53 +3,58 @@
     {
       "id":"1",
       "title": "Peaceful Piano",
+      "subTitle":"Peaceful piano to help you down,breathe, and relax.",
       "artist": "Coldplay",
-      "album": "A Sky Full of Stars",
+      "album": "A Peaceful piano to help you down ...",
       "duration": null,
-      "image":"https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6",
-      "color":"linear-gradient(315deg, #b8c6db 0%, #f5f7fa 74%)"
+      "image":"https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" 
     },
     {
-      "title": "Deep FOcus",
+      "title": "Deep Focus",
+      "subTitle":"Keep calm and focus with ambient and post-rock music.",
       "artist": "Chirag Khadka",
-      "album": "Jay Shamboo",
+      "album": "Keep calm and focus with ambient...", 
       "duration": null,
-      "image":"https://i.scdn.co/image/ab67706f000000025551996f500ba876bda73fa5",
-      "color": "linear-gradient(147deg, #d7d7d7 0%, #353535 74%)"
+      "image":"https://i.scdn.co/image/ab67706f000000025551996f500ba876bda73fa5"
+      
 
     },
     {
       "title": "Instrumental Study",
+      "subTitle":"Focus with soft music in the background",
       "artist": "Focus with soft study music in the...",
-      "album": "Ludo",
+      "album": "Focus with soft study music in the...",
       "duration": null,
       "image":"https://i.scdn.co/image/ab67706f00000002fe24d7084be472288cd6ee6c"
+      
     },
     {
-      "title": "Focus FLow",
-      "artist": "Uptempo instrumental hip hop beats",
-      "album": "Azaan",
+      "title": "Workday Lounge",
+      "subTitle": "Lounge and chill out music for your workday",
+      "album": "Lounge and chill out music...",
       "duration": null,
       "image":"https://i.scdn.co/image/ab67706f00000002724554ed6bed6f051d9b0bfc"
+     
+
     },
     {
-      "title": "Aao Chalein",
-      "artist": "Taba Chake",
-      "album": "JioSaavn Live Anywhere By Taba Chake",
+      "title": "Focus Flow",
+      "subTitle": "Uptempo instrumental hip hop beats.",
+      "album": "Uptempo instrumental hip hop beats.",
       "duration": null,
       "image":"https://i.scdn.co/image/ab67706f00000002e435ce0a86a8b9dc24527618"
     },
     {
       "title": "Beats to think to",
-      "artist": "Pritam, Mohit Chauhan",
-      "album": "Dil Toh Baccha Hai Ji",
+      "subTitle": "Focus with deep techno and tech house.",
+      "album": "Focus with deep techno and tech house.",
       "duration": null,
       "image":"https://i.scdn.co/image/ab67706f0000000296e08a91ef3c7a6e7bfaa9a6"
     },
     {
       "title": "Reading Adventures",
-      "artist": "Anurag Saikia, Raj Shekhar, Rekha Bhardwaj",
-      "album": "Mismatched: Season 2 (Music from the Netflix Series)",
+      "subTitle": "Gentle instrumental music to help you relax while you read.",
+      "album": "Gentle instrumental music to help....",
       "duration": null,
       "image":"https://i.scdn.co/image/ab67706f00000002fee0aa7c6bfc815873e45f9e"
     },

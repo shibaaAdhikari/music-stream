@@ -13,7 +13,20 @@ const PlayList = atom({
   default: "nothing",
 });
 
-export { musicState, PlayList };
+const authAtom = atom({
+  key: "auth",
+  default: () => {
+    const storedUser = localStorage.getItem("user");
+    return storedUser ? JSON.parse(storedUser) : null;
+  },
+});
+
+const searchFunction = atom({
+  key: "searchQueryState",
+  default: "",
+});
+
+export { musicState, PlayList, authAtom, searchFunction };
 
 // export const musics = selector({
 //   key: "musics",

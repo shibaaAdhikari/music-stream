@@ -14,7 +14,7 @@ const Mainpage = () => {
         </div>
         <div
           className="content-section "
-          style={{ width: "100%", marginLeft: "15%" }}
+          style={{ width: "100%", marginLeft: "13%" }}
         >
           <Outlet />
         </div>

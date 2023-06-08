@@ -7,8 +7,12 @@ import { musics } from "../../Components/Recoil/selector";
 const Home = () => {
   const playlistData = useRecoilValue(PlayListSelector);
   const dummyMusics = useRecoilValue(musics);
+
   return (
-    <div className="container-fluid  justify-content-center">
+    <div
+      className="container-fluid  justify-content-center"
+      style={{ marginLeft: "3%" }}
+    >
       <CardContainer containerTitle={"Focus"} musics={dummyMusics} />
       <CardContainer
         containerTitle={"Spotify Playlist"}

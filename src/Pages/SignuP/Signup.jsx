@@ -3,15 +3,20 @@ import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
 import { useState } from "react";
 import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
 import { auth } from "../../firebase/firebase";
+import { useNavigate } from "react-router-dom";
+import { useSetRecoilState } from "recoil";
+import { authAtom } from "../../Components/Recoil/Store";
 
 const Signup = () => {
   var eReg = /\S+@\S+\.\S+/;
+  const navigate = useNavigate();
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [username, setUsername] = useState("default username");
+  const setUser = useSetRecoilState(authAtom);
 
   const validatePassword = () => {
     if (!password) {
@@ -61,7 +66,11 @@ const Signup = () => {
           });
 
         // Verify that the display name is set
-        console.log("User display name:", user.displayName);
+        // console.log("User display name:", user.displayName);
+        // console.log(user);
+        setUser(user);
+        localStorage.setItem("user", user);
+        navigate("/Login");
       })
       .catch((error) => {
         const errorCode = error.code;
@@ -145,10 +154,16 @@ const Signup = () => {
                     className="InputField "
                     value={email}
                     onChange={handleEmailChange}
-                    validate={validateEmail(email)}
+                    validate={validateEmail}
                     required
                   />
-                  {emailError && <span className="error">{emailError}</span>}
+                  <p>
+                    {emailError && (
+                      <span className="error" style={{ color: "red" }}>
+                        {emailError}
+                      </span>
+                    )}
+                  </p>
 
                   <Label
                     for="examplePassword"
@@ -165,30 +180,30 @@ const Signup = () => {
                     className="InputField"
                     value={password}
                     onChange={handlePasswordChange}
-                    validate={validatePassword(password)}
+                    validate={validatePassword}
                     required
                     minLength={6}
                   />
                   {passwordError && (
-                    <span className="error">{passwordError}</span>
+                    <span className="error" style={{ color: "red" }}>
+                      {passwordError}
+                    </span>
                   )}
 
                   <Label
                     for="examplePassword"
                     className="text-dark"
                     style={{ fontSize: "15px", fontWeight: "bolder" }}
-                    onChange={handleUsernameChange}
-                    type="text"
                   >
                     What should we call you?
                   </Label>
-
                   <Input
                     type="text"
                     name="profileName"
                     id="exampleProfileName"
                     placeholder="Enter a profile name."
                     className="InputField"
+                    onChange={handleUsernameChange}
                   />
 
                   <p style={{ fontSize: "15px" }}>

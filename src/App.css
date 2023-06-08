@@ -140,3 +140,15 @@ tr:hover {
   background-position: center;
   background-repeat: no-repeat;
 }
+.goBack:hover {
+  background-color: #2727285f;
+}
+.goForward:hover {
+  background-color: #2727285f;
+}
+
+@media screen and (max-width: 1880px) {
+  .footer {
+    display: none;
+  }
+}

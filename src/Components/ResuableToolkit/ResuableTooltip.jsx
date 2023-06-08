@@ -5,14 +5,14 @@ const ReusableTooltip = ({ id, content, placement, trigger, style }) => {
   return (
     <>
       <div className="text-center">
-        <Button id="hello"}>Click me</Button>
+        <Button id={id}>Click me</Button>
         <UncontrolledTooltip
-          placement="right"
-          target="hello"
+          placement={placement}
+          target={id}
           trigger={trigger}
           style={style}
         >
-          helllooo
+          {content}
         </UncontrolledTooltip>
       </div>
     </>

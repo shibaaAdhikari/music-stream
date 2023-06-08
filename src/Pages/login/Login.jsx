@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  Button,
-  Form,
-  FormGroup,
-  Label,
-  Input,
-  Navbar,
-  NavbarBrand,
-} from "reactstrap";
+import { Button, Form, Label, Input, Navbar, NavbarBrand } from "reactstrap";
 import "./Login.css";
 import Spotify from "../../Assests/spotify.png";
 import LoginButton from "../../Components/LoginButton";
@@ -22,6 +14,8 @@ import {
 import { auth } from "../../firebase/firebase";
 import { useNavigate } from "react-router";
 import { useState } from "react";
+import { authAtom } from "../../Components/Recoil/Store";
+import { useSetRecoilState } from "recoil";
 
 const Login = () => {
   const navigate = useNavigate();
@@ -31,6 +25,7 @@ const Login = () => {
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const setUser = useSetRecoilState(authAtom);
 
   const validatePassword = () => {
     if (!password) {
@@ -50,6 +45,7 @@ const Login = () => {
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+
   const formSubmitClickHandler = async (e) => {
     e.preventDefault();
 
@@ -71,11 +67,13 @@ const Login = () => {
         await setPersistence(auth, browserLocalPersistence).then(() => {
           return signInWithEmailAndPassword(auth, email, password);
         });
-        console.log("User display name:", userCredential.user.displayName);
+        console.log("User display name:", userCredential.user);
         navigate("/");
+        localStorage.setItem("user", JSON.stringify(userCredential.user));
+        setUser(userCredential.user);
       })
       .catch((error) => {
-        const errorCode = error.code;
+        let errorCode = error.code;
         console.log(error.message);
         if (errorCode === "auth/wrong-password") {
           setPasswordError("Wrong Password.");
@@ -134,9 +132,9 @@ const Login = () => {
               id="exampleEmail"
               placeholder="Email or Username "
               className="InputField "
-              handleOnChange={handleEmailChange}
+              onChange={handleEmailChange}
               invalidate={emailError !== ""}
-              validate={validateEmail(email)}
+              validate={validateEmail}
               errorMessage={emailError}
             />
 
@@ -149,9 +147,9 @@ const Login = () => {
               id="examplePassword"
               placeholder="Password"
               className="InputField "
-              handleOnChange={handlePasswordChange}
+              onChange={handlePasswordChange}
               invalidate={passwordError !== ""}
-              validate={validatePassword(password)}
+              validate={validatePassword}
               errorMessage={passwordError}
             />
 
@@ -159,7 +157,7 @@ const Login = () => {
               <Button
                 className=" text-dark rounded-pill mb-5 mt-4 p-2"
                 style={{ backgroundColor: "rgb(31,223,100)" }}
-                onClick={formSubmitClickHandler}
+                type="submit"
               >
                 Login
               </Button>

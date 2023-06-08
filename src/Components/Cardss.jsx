@@ -78,24 +78,27 @@ const Cardss = ({ title, image, descriptions, album }) => {
             </CardTitle>
 
             <CardSubtitle
-              className="mb-2 text-muted cardgroup text-light"
+              className=" text-muted cardgroup "
               tag="h6"
               style={{
-                color: "wheat",
                 marginTop: "10px",
                 textAlign: "center",
               }}
             >
-              {title}
+              <p style={{ color: "white" }} className="mt-1">
+                {" "}
+                {title}
+              </p>
             </CardSubtitle>
 
             <CardSubtitle
-              className="mb-2 text-muted cardgroup"
+              className="text-muted cardgroup"
               tag="h6"
               style={{
                 color: "rgb(167,167,167)",
                 marginTop: "10px",
-                textAlign: "center",
+                marginLeft: "19px",
+                textAlign: "start",
               }}
             >
               {album}
