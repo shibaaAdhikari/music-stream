@@ -69,6 +69,7 @@ const AlbumList = () => {
                 <img
                   src={song.image}
                   style={{ width: "50px", paddingRight: "15px" }}
+                  alt="images"
                 />
                 {song.title}
               </td>
