@@ -1,0 +1,83 @@
+{
+  "songs": [
+    {
+      "id":"1",
+      "title": "Peaceful Piano",
+      "subTitle":"Peaceful piano to help you down,breathe, and relax.",
+      "artist": "Coldplay",
+      "album": "A Peaceful piano to help you down ...",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f00000002ca5a7517156021292e5663a6" 
+    },
+    {
+      "title": "Deep Focus",
+      "subTitle":"Keep calm and focus with ambient and post-rock music.",
+      "artist": "Chirag Khadka",
+      "album": "Keep calm and focus with ambient...", 
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f000000025551996f500ba876bda73fa5"
+      
+
+    },
+    {
+      "title": "Instrumental Study",
+      "subTitle":"Focus with soft music in the background",
+      "artist": "Focus with soft study music in the...",
+      "album": "Focus with soft study music in the...",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f00000002fe24d7084be472288cd6ee6c"
+      
+    },
+    {
+      "title": "Workday Lounge",
+      "subTitle": "Lounge and chill out music for your workday",
+      "album": "Lounge and chill out music...",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f00000002724554ed6bed6f051d9b0bfc"
+     
+
+    },
+    {
+      "title": "Focus Flow",
+      "subTitle": "Uptempo instrumental hip hop beats.",
+      "album": "Uptempo instrumental hip hop beats.",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f00000002e435ce0a86a8b9dc24527618"
+    },
+    {
+      "title": "Beats to think to",
+      "subTitle": "Focus with deep techno and tech house.",
+      "album": "Focus with deep techno and tech house.",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f0000000296e08a91ef3c7a6e7bfaa9a6"
+    },
+    {
+      "title": "Reading Adventures",
+      "subTitle": "Gentle instrumental music to help you relax while you read.",
+      "album": "Gentle instrumental music to help....",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f00000002fee0aa7c6bfc815873e45f9e"
+    },
+    {
+      "title": "Relaxing Reading",
+      "artist": "Queen",
+      "album": "The Game (2011 Remaster)",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f00000002ba1149f135035bc23c4a7f25"
+    },
+    {
+      "title": "Aao Chalein",
+      "artist": "Taba Chake",
+      "album": "JioSaavn Live Anywhere By Taba Chake",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f00000002e435ce0a86a8b9dc24527618"
+    },
+    {
+      "title": "Beats to think to",
+      "artist": "Pritam, Mohit Chauhan",
+      "album": "Dil Toh Baccha Hai Ji",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f0000000296e08a91ef3c7a6e7bfaa9a6"
+    }
+  ]
+  }

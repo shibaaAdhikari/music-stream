@@ -1,7 +1,11 @@
 import React from "react";
 
 const Library = () => {
-  return <div>Library</div>;
+  return (
+    <div>
+      <p> Tooltip is working</p>
+    </div>
+  );
 };
 
 export default Library;
