@@ -6,10 +6,18 @@ import { Table } from "reactstrap";
 import { BiTime } from "react-icons/bi";
 import Songs from "../Data/songs.json";
 import { useLocation } from "react-router";
+import { Button } from "reactstrap";
+import { FaStepBackward, FaPlay, FaStepForward } from "react-icons/fa";
+import { useState } from "react";
 
 const AlbumList = () => {
   const location = useLocation();
   const music = location.state;
+  const [selectedMusic, setSelectedMusic] = useState(null);
+
+  const handleMusicSelect = (music) => {
+    setSelectedMusic(music);
+  };
 
   return (
     <div>
@@ -63,7 +71,11 @@ const AlbumList = () => {
         </thead>
         <tbody>
           {Songs.songs.map((song, index) => (
-            <tr key={index} className="mb-2  ">
+            <tr
+              key={index}
+              className="mb-2  "
+              onClick={() => handleMusicSelect(song)}
+            >
               <th scope="row">{index + 1}</th>
               <td className="gap-3">
                 <img
@@ -80,6 +92,33 @@ const AlbumList = () => {
           ))}
         </tbody>
       </Table>
+      <div>
+        {selectedMusic && (
+          <div
+            style={{
+              position: "fixed",
+              bottom: "1%",
+              backgroundColor: "rgba(57, 55, 55, 0.8)",
+              padding: "7px",
+              color: "#fff",
+              borderRadius: "40px",
+              width: "80%",
+            }}
+          >
+            <div className="text-center ">
+              <Button color="dark" className="mx-4">
+                <FaStepBackward />
+              </Button>
+              <Button color="success">
+                <FaPlay />
+              </Button>
+              <Button color="dark" className="mx-4">
+                <FaStepForward />
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };

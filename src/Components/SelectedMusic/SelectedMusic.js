@@ -13,12 +13,12 @@ const SelectedMusic = ({ music }) => {
       }}
     >
       <div>
-        <img
+        {/* <img
           src={music.image}
           alt="img"
           style={{ width: "100%", height: "100%" }}
           className="text-light"
-        />
+        /> */}
       </div>
       <div>
         <p className="text-light mt-5">Playlist</p>
@@ -38,7 +38,7 @@ const SelectedMusic = ({ music }) => {
           <BsSpotify
             style={{ color: "green", fontSize: "24px", cursor: "pointer" }}
           />
-          <span className="text-light mx-3">Spotify</span>
+          <span className="text-light mx-3">Music-Stream-Web-App</span>
           <span className="text-light mx-1">.7,70,722 likes</span>
           <span className="text-light mx-1">.300 likes</span>
         </div>
