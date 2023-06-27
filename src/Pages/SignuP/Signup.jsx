@@ -1,103 +1,39 @@
-import React from "react";
-import { Button, Form, FormGroup, Label, Input, Col } from "reactstrap";
-import { useState } from "react";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
-import { auth } from "../../firebase/firebase";
-import { useNavigate } from "react-router-dom";
-import { useSetRecoilState } from "recoil";
-import { authAtom } from "../../Components/Recoil/Store";
+import React, { useState } from "react";
+import axios from "axios";
+import { Button, Form, Label, Input } from "reactstrap";
 
 const Signup = () => {
-  var eReg = /\S+@\S+\.\S+/;
-  const navigate = useNavigate();
+  const [formData, setFormData] = useState({
+    email: "",
+    password: "",
+    username: "",
+  });
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
-  const [username, setUsername] = useState("default username");
-  const setUser = useSetRecoilState(authAtom);
-
-  const validatePassword = () => {
-    if (!password) {
-      return false;
-    }
-    return password.length < 6 ? false : true;
-  };
-  const validateEmail = (email) => {
-    return eReg.test(email) ? true : false;
-  };
-
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handleEmailChange = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const signupFormSubmitHandler = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!eReg.test(email)) {
-      setEmailError("Please enter a valid email address.");
-      return;
-    }
-    await createUserWithEmailAndPassword(auth, email, password)
-      .then(async (userCredential) => {
-        // Signed in
-        const user = userCredential.user;
-        // Update the display name
-        await updateProfile(auth.currentUser, {
-          displayName: username,
-        })
-          .then(() => {
-            // Profile updated!
-            // ...
-            console.log(auth.currentUser.displayName);
-          })
-          .catch((error) => {
-            // An error occurred
-            // ...
-            console.log(error.message);
-          });
 
-        // Verify that the display name is set
-        // console.log("User display name:", user.displayName);
-        // console.log(user);
-        setUser(user);
-        localStorage.setItem("user", user);
-        navigate("/Login");
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        console.log(error.message);
-        if (errorCode === "auth/email-already-in-use") {
-          setEmailError("Email already in use.");
-        }
-        if (errorCode === "auth/missing-email") {
-          setEmailError("Please enter a valid email address.");
-        }
-        if (errorCode === "auth/weak-password") {
-          setPasswordError("Password should be at least 6 characters.");
-        }
-      });
+    try {
+      const response = await axios.post(
+        "http://127.0.0.1:3000/Signup/signup",
+        formData
+      );
+      console.log(response.data); // Handle the response as needed
+      // Optionally, redirect the user to a different page or perform additional actions
+    } catch (error) {
+      console.error(error.response.data); // Handle the error response
+    }
   };
 
   return (
     <>
-      <div id="signup" className="container-fluid  bg-white">
-        <Form onSubmit={signupFormSubmitHandler}>
+      <div id="signup" className="container mt-5 bg-white">
+        <Form onSubmit={handleSubmit}>
           <div
             className=" container-fluid bg-white d-flex mt-5 align-items-center justify-content-center"
             style={{ borderRadius: "15px", width: "40%" }}
           >
             <div style={{ width: "65%" }}>
               <div>
-                {/* <image src={Spotify} /> */}
                 <h4
                   className="text-dark text-center title mb-5 mt-5"
                   style={{
@@ -112,21 +48,6 @@ const Signup = () => {
               </div>
 
               <div>
-                <div className="d-flex flex-column">
-                  <Button
-                    className="InputField align-contents-center rounded-pill mb-2 p-2 "
-                    style={{ backgroundColor: "rgb(64,90,147)" }}
-                  >
-                    Sign up with Facebook
-                  </Button>
-                  <Button
-                    className="InputField rounded-pill mb-2 p-2 text-dark"
-                    style={{ backgroundColor: "white" }}
-                  >
-                    Continue with Google
-                  </Button>
-                </div>
-
                 <hr></hr>
                 <p
                   style={{ fontSize: "17px", fontWeight: "bolder" }}
@@ -148,22 +69,16 @@ const Signup = () => {
                   </Label>
                   <Input
                     type="email"
-                    name="Email or username"
+                    name="email"
                     id="exampleEmail"
-                    placeholder="Email your email "
-                    className="InputField "
-                    value={email}
-                    onChange={handleEmailChange}
-                    validate={validateEmail}
+                    placeholder="Enter your email"
+                    className="InputField"
+                    value={formData.email}
+                    onChange={(e) =>
+                      setFormData({ ...formData, email: e.target.value })
+                    }
                     required
                   />
-                  <p>
-                    {emailError && (
-                      <span className="error" style={{ color: "red" }}>
-                        {emailError}
-                      </span>
-                    )}
-                  </p>
 
                   <Label
                     for="examplePassword"
@@ -178,20 +93,16 @@ const Signup = () => {
                     id="examplePassword"
                     placeholder="Create a password"
                     className="InputField"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    validate={validatePassword}
+                    value={formData.password}
+                    onChange={(e) =>
+                      setFormData({ ...formData, password: e.target.value })
+                    }
                     required
                     minLength={6}
                   />
-                  {passwordError && (
-                    <span className="error" style={{ color: "red" }}>
-                      {passwordError}
-                    </span>
-                  )}
 
                   <Label
-                    for="examplePassword"
+                    for="exampleProfileName"
                     className="text-dark"
                     style={{ fontSize: "15px", fontWeight: "bolder" }}
                   >
@@ -203,57 +114,26 @@ const Signup = () => {
                     id="exampleProfileName"
                     placeholder="Enter a profile name."
                     className="InputField"
-                    onChange={handleUsernameChange}
+                    value={formData.profileName}
+                    onChange={(e) =>
+                      setFormData({ ...formData, username: e.target.value })
+                    }
                   />
 
                   <p style={{ fontSize: "15px" }}>
                     This appears on your profile.
                   </p>
-
-                  <Col sm={10}>
-                    <Label for="gender">What&apos;s your gender?</Label>
-                    <div className="d-flex gap-5 mb-3 flex-wrap">
-                      <FormGroup check>
-                        <Input name="radio" type="radio" />{" "}
-                        <Label check>Male</Label>
-                      </FormGroup>
-                      <FormGroup check>
-                        <Input name="radio" type="radio" />{" "}
-                        <Label check>Female</Label>
-                      </FormGroup>
-                      <FormGroup check>
-                        <Input name="radio" type="radio" />{" "}
-                        <Label check>Non-binary</Label>
-                      </FormGroup>
-                    </div>
-                  </Col>
                 </div>
-
-                <div className="mb-2">
-                  <Label check className="mb-2">
-                    <Input type="checkbox" /> I agree to the Spotify Terms and
-                    Conditions of Use and Privacy Policy.
-                  </Label>
-                  <Label check className="mb-2">
-                    <Input type="checkbox" /> Share my registration data with
-                    Spotify's content providers for marketing purposes.
-                  </Label>
-                  <Label check className="mb-2">
-                    <Input type="checkbox" /> I agree to the Spotify Terms and
-                    Conditions of Use and Privacy Policy.
-                  </Label>
-                </div>
-
                 <div className="d-flex  justify-content-center">
                   <Button
-                    className="  rounded-pill mb-3 p-2  text-dark p-2"
-                    style={{ backgroundColor: "rgb(30,215,96)", width: "25%" }}
+                    className="rounded-pill mb-3 p-2 text-dark p-2"
+                    style={{ backgroundColor: "rgb(18, 143, 6)", width: "25%" }}
                     type="submit"
                   >
                     Sign up
                   </Button>
                 </div>
-                <p className="text-center"> Have an account? Login</p>
+                <p className="text-center">Have an account? Login</p>
               </div>
             </div>
           </div>
