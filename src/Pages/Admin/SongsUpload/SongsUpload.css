@@ -1,0 +1,49 @@
+.songs-upload-container {
+  padding: 20px;
+  background-color: #f7f7f7;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.upload-heading {
+  color: #333;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.upload-form {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.upload-label {
+  color: #fff;
+  font-weight: bold;
+}
+
+.upload-button {
+  margin-top: 20px;
+}
+
+.songs-table {
+  margin-top: 30px;
+}
+
+.songs-table th {
+  background-color: #333;
+  color: #fff;
+  font-weight: bold;
+  text-align: center;
+}
+
+.songs-table td {
+  text-align: center;
+}
+
+.songs-table .btn {
+  margin-right: 5px;
+}
+
+.black-text {
+  color: #000;
+}

@@ -5,7 +5,8 @@ import { BiSearch, BiLibrary } from "react-icons/bi";
 import { TbSquarePlus } from "react-icons/tb";
 import { CgCardHearts } from "react-icons/cg";
 import { Media } from "reactstrap";
-import Spotify from "../Assests/spotify.png";
+// import Spotify from "../Assests/spotify.png";
+import Music from "../Assests/music2.png";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useState } from "react";
@@ -46,9 +47,9 @@ const SidenavBar = ({ children }) => {
         className="align-items-start d-flex justify-content-start fixed-top "
       >
         <Media
-          style={{ marginLeft: "5%", marginTop: "15px", marginBottom: "15px" }}
+          style={{ marginLeft: "5%", marginTop: "10px", marginBottom: "15px" }}
         >
-          <Media object src={Spotify} alt="My Image" style={{ width: "75%" }} />
+          <Media object src={Music} alt="My Image" style={{ width: "100%" }} />
         </Media>
 
         {menuItems.map((item, index) => (
