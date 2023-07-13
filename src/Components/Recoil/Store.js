@@ -16,7 +16,7 @@ const PlayList = atom({
 const authAtom = atom({
   key: "auth",
   default: () => {
-    const storedUser = localStorage.getItem("user");
+    const storedUser = localStorage.getItem("userName");
     return storedUser ? JSON.parse(storedUser) : null;
   },
 });

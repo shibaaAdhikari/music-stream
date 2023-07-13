@@ -31,7 +31,7 @@ const SongsUpload = () => {
       ...prevState,
       [name]: files[0],
     }));
-  };
+  };  
 
   const handleSubmit = async (e) => {
     e.preventDefault();

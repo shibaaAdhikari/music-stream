@@ -57,19 +57,17 @@ const Cardss = ({ title, image, descriptions, album }) => {
               className="cardgroup"
             >
               {descriptions}
-              <div>
-                <FaSpotify />
-              </div>
+              <div>{/* <FaSpotify /> */}</div>
               {isHovered && (
                 <div className="playButtons ">
                   <FaPlayCircle
                     style={{
                       fontSize: "45px",
-                      color: "green",
+                      color: "#D94919",
                       position: "relative",
                       left: "135px",
                       bottom: "-70px",
-                      backgroundColor: "black",
+                      backgroundColor: "white",
                     }}
                     className="rounded-circle"
                   />

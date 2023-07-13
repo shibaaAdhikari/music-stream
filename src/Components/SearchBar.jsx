@@ -9,6 +9,8 @@ import { searchFunction } from "./Recoil/Store";
 import { useSetRecoilState } from "recoil";
 
 const SearchBar = () => {
+  // const location = useLocation();
+  // const username = location.state.username;
   const navigate = useNavigate();
   const navigateSignup = () => {
     navigate("/Signup");
@@ -40,8 +42,8 @@ const SearchBar = () => {
   return (
     <Navbar
       className="container-fluid d-flex sticky-top text-center justify-content-center align-items-center"
-      color="black"
-      // style={{ color: "black" }}
+      // color="black"
+      style={{ backgroundColor: "#000000" }}
       dark
     >
       {!searchBar ? (
