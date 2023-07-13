@@ -9,6 +9,7 @@ import Features from "./Pages/Features/Features";
 import Home from "./Pages/Homepage/Home";
 
 import AlbumList from "./Components/AlbumList";
+import SongsUpload from "./Pages/Admin/SongsUpload/SongsUpload";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           </Route>
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Login" element={<Login />} />
+          <Route path="/upload" element={<SongsUpload />} />
         </Routes>
       </div>
     </>
