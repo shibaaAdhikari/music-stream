@@ -23,22 +23,25 @@ const AlbumList = () => {
     <div>
       <div
         style={{
-          backgroundColor: "#33343b",
+          // backgroundColor: "#33343b",
           backgroundImage:
-            "linear-gradient(185deg, #33343b 0%, #465156 46%, #729ba6 100%)",
+            "linear-gradient(170deg, #221f1e 0%, #beb09e69 46%, #5b3d34 100%)",
           paddingBottom: "20px",
           border: "1px solid",
           borderTop: "10px solid",
           backgroundClip: "padding-box",
+          borderRadius: "10px",
+          cursor: "pointer",
         }}
+        className="mx-5 mt-4 "
       >
         <div>
           <SelectedMusic music={music} />
         </div>
         <div>
-          <div className="container-fluid  ">
+          {/* <div className="container-fluid  ">
             <AiFillPlayCircle
-              style={{ fontSize: "60px", color: "green" }}
+              style={{ fontSize: "60px", color: "#D94919", marginLeft: "3%" }}
               className="playbutton"
             />
             <AiOutlineHeart
@@ -49,12 +52,12 @@ const AlbumList = () => {
               style={{ fontSize: "30px", color: "gray", marginLeft: "15px" }}
               className="heart"
             />
-          </div>
+          </div> */}
         </div>
       </div>
 
       <Table
-        className="container-fluid  text-light  mt-5 "
+        className="container-fluid  text-light  mt-5 mb-5 "
         style={{ width: "90%" }}
         borderless
       >

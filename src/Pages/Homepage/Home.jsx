@@ -1,11 +1,11 @@
 import React from "react";
 import CardContainer from "../../Components/CardContainer/CardContainer";
 import { useRecoilValue } from "recoil";
-import { PlayListSelector } from "../../Components/Recoil/selector";
+// import { PlayListSelector } from "../../Components/Recoil/selector";
 import { musics } from "../../Components/Recoil/selector";
 
 const Home = () => {
-  const playlistData = useRecoilValue(PlayListSelector);
+  // const playlistData = useRecoilValue(PlayListSelector);
   const dummyMusics = useRecoilValue(musics);
 
   return (
@@ -13,11 +13,8 @@ const Home = () => {
       className="container-fluid  justify-content-center"
       style={{ marginLeft: "3%" }}
     >
-      <CardContainer containerTitle={"Focus"} musics={dummyMusics} />
-      <CardContainer
-        containerTitle={"Spotify Playlist"}
-        playlistData={playlistData}
-      />
+      <CardContainer containerTitle={"Songs"} musics={dummyMusics} />
+      {/* <CardContainer containerTitle={"Playlist"} playlistData={playlistData} /> */}
     </div>
   );
 };

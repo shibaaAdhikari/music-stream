@@ -1,5 +1,5 @@
 import React from "react";
-import SpotifyList from "../SpotifyPlayList/SpotifyList";
+import SongList from "../SpotifyPlayList/SpotifyList";
 import Cardss from "../Cardss";
 
 const Spotify = ({ props }) => {
@@ -11,7 +11,7 @@ const Spotify = ({ props }) => {
           <p></p>
         </div>
         <div className="d-flex gap-3 md-4 sm-3 flex-wrap ">
-          {SpotifyList.list.map((list) => (
+          {SongList.list.map((list) => (
             <Cardss
               key={list.id}
               image={list.title}

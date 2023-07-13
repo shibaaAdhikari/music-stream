@@ -1,47 +1,72 @@
 import React from "react";
+import cdImage from "../../Assests/cdcover.png";
 
-import { BsSpotify } from "react-icons/bs";
 const SelectedMusic = ({ music }) => {
-  const { color, backgroundImage } = music;
+  const rotationAnimation = `
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  `;
   return (
     <div
-      className=" d-flex  gap-5 p-3 m-0   "
       style={{
-        width: "100%",
-        background: `${color} `,
-        backgroundImage: `${backgroundImage}`,
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "flex-start",
+        gap: "3rem",
       }}
+      className="mx-5"
     >
-      <div>
-        {/* <img
+      <style>{rotationAnimation}</style>
+      {/* <div style={{ width: "20%", height: "50%" }} className="mt-5"> */}
+      {/* <img
           src={music.image}
           alt="img"
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: "100%", height: "100%", borderRadius: "5%" }}
           className="text-light"
         /> */}
+      <div
+        style={{
+          width: "30%",
+          height: "55%",
+          position: "relative",
+          animation: "rotate 15s infinite linear",
+          transformOrigin: "center center",
+        }}
+      >
+        <img
+          src={cdImage}
+          alt="CD"
+          className="cd-img "
+          style={{
+            width: "100%",
+            height: "100%",
+            // transformOrigin: "center center",
+          }}
+        />
       </div>
-      <div>
-        <p className="text-light mt-5">Playlist</p>
-        <h1
-          className="text-light fs-1 mt-5 mb-3"
-          style={{ fontWeight: "bolder", fontSize: "50px" }}
+
+      <div style={{ textAlign: "flex-start" }}>
+        {/* <h3 className="text-light mt-5 mb-2" style={{ fontFamily: "serif" }}>
+          {" "}
+          Playlist
+        </h3> */}
+        <h5
+          className="text-light  mt-5"
+          style={{
+            fontWeight: "bolder",
+            fontSize: "70px",
+            fontFamily: "cursive",
+          }}
         >
           {music.title}
-          {/* musicTitle */}
-        </h1>
-        <h6 className="text-light mt-1">
-          {music.subTitle}
-          {/* musicArtist */}
-        </h6>
-
-        <div className="mt-5">
-          <BsSpotify
-            style={{ color: "green", fontSize: "24px", cursor: "pointer" }}
-          />
-          <span className="text-light mx-3">Music-Stream-Web-App</span>
-          <span className="text-light mx-1">.7,70,722 likes</span>
-          <span className="text-light mx-1">.300 likes</span>
-        </div>
+        </h5>
+        <h6 className="text-light mt-1">{music.subTitle}</h6>
       </div>
     </div>
   );
