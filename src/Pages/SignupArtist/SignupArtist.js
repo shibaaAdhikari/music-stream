@@ -3,9 +3,8 @@ import axios from "axios";
 import { Button, Form, Label, Input, Navbar, NavbarBrand } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import music from "../../Assests/music3.png";
-import "./SignUp.css";
 
-const Signup = () => {
+const Artist = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
     email: "",
@@ -19,7 +18,7 @@ const Signup = () => {
 
     try {
       const response = await axios.post(
-        "http://127.0.0.1:3000/api/artistAccounts/signup",
+        "http://127.0.0.1:3000/api/artists/signup",
         formData
       );
       console.log(response.data); // Handle the response as needed
@@ -48,7 +47,10 @@ const Signup = () => {
         }}
       >
         <Form onSubmit={handleSubmit}>
-          <h1 className="text-light text-center mt-5 mb-5 pt-5">Signin Page</h1>
+          <h1 className="text-light text-center mt-5 mb-5 pt-5">
+            {" "}
+            Artist Signin Page
+          </h1>
           <div>
             <div>
               <Label
@@ -150,14 +152,11 @@ const Signup = () => {
             <p className="text-center text-light mb-3">
               Have an account?{" "}
               <span class="text-decoration-none">
-                <a href="/login" className="text-white">
+                <a href="/artist" className="text-white">
                   Login
                 </a>
               </span>
             </p>
-            <a href="/SignupArtist" className="text-white">
-              Login
-            </a>
           </div>
         </Form>
       </div>
@@ -165,4 +164,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Artist;

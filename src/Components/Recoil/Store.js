@@ -8,6 +8,11 @@ const musicState = atom({
   },
 });
 
+const songsState = atom({
+  key: "songsState",
+  default: [],
+});
+
 const PlayList = atom({
   key: "spotifyPlayList",
   default: "nothing",
@@ -16,9 +21,14 @@ const PlayList = atom({
 const authAtom = atom({
   key: "auth",
   default: () => {
-    const storedUser = localStorage.getItem("userName");
-    return storedUser ? JSON.parse(storedUser) : null;
+    const storedUser = localStorage.getItem("username");
+    return storedUser ? storedUser : null;
   },
+});
+
+const usernameAtom = atom({
+  key: "username",
+  default: "",
 });
 
 const searchFunction = atom({
@@ -26,7 +36,14 @@ const searchFunction = atom({
   default: "",
 });
 
-export { musicState, PlayList, authAtom, searchFunction };
+export {
+  musicState,
+  PlayList,
+  authAtom,
+  searchFunction,
+  songsState,
+  usernameAtom,
+};
 
 // export const musics = selector({
 //   key: "musics",

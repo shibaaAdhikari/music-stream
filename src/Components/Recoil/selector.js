@@ -3,11 +3,24 @@ import axios from "axios";
 import SpotifyPlaylist from "../../Data/SpotifyPlaylist.json";
 
 const url = `http://localhost:8000/songs`;
+const url1 = "http://127.0.0.1:3000/Songs/song";
 const musics = selector({
   key: "musics",
   get: async () => {
     try {
       const response = await axios.get(url);
+      return response.data;
+    } catch (error) {
+      throw error;
+    }
+  },
+});
+
+const songsSelector = selector({
+  key: "songs",
+  get: async () => {
+    try {
+      const response = await axios.get(url1);
       return response.data;
     } catch (error) {
       throw error;
@@ -28,4 +41,4 @@ const PlayListSelector = selector({
   },
 });
 
-export { musics, PlayListSelector };
+export { musics, PlayListSelector, songsSelector };

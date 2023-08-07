@@ -7,7 +7,7 @@ import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import music from "../../Assests/music3.png";
 
-const Login = () => {
+const LoginArtist = () => {
   // State variables for email and password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -20,17 +20,20 @@ const Login = () => {
 
     try {
       // Make an HTTP POST request to the backend login route
-      const response = await axios.post("http://127.0.0.1:3000/Login/login", {
-        username: email,
-        password,
-      });
+      const response = await axios.post(
+        "http://127.0.0.1:3000/api/artists/signin",
+        {
+          username: email,
+          password,
+        }
+      );
 
       // Handle the response based on the status
       if (response.status === 200) {
         // Login successful, perform necessary actions
         localStorage.setItem("username", email);
         console.log(response);
-        navigate("/");
+        navigate("/upload");
         // Redirect to the desired page or update the app state
       } else {
         // Login failed, display error message or perform necessary actions
@@ -114,4 +117,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginArtist;

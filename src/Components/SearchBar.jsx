@@ -3,14 +3,12 @@ import { Navbar, NavbarBrand } from "reactstrap";
 import { MdArrowForwardIos, MdArrowBackIosNew } from "react-icons/md";
 import { useNavigate, useLocation } from "react-router-dom";
 import { AiOutlineSearch } from "react-icons/ai";
-import { authAtom } from "./Recoil/Store";
-import { useRecoilValue } from "recoil";
 import { searchFunction } from "./Recoil/Store";
 import { useSetRecoilState } from "recoil";
 
 const SearchBar = () => {
-  // const location = useLocation();
-  // const username = location.state.username;
+  const user = localStorage.getItem("username") || "";
+  console.log(user);
   const navigate = useNavigate();
   const navigateSignup = () => {
     navigate("/Signup");
@@ -23,8 +21,6 @@ const SearchBar = () => {
   const currentLocation = useLocation();
   const hideInput = currentLocation.pathname === "/";
   const searchBar = currentLocation.pathname === "/";
-  const user = useRecoilValue(authAtom);
-  const userName = user?.displayName || "";
   const setSearchQuery = useSetRecoilState(searchFunction);
 
   const goBack = () => {
@@ -128,7 +124,7 @@ const SearchBar = () => {
       )}
 
       <NavbarBrand className="d-flex">
-        {userName ? (
+        {user ? (
           // Display the user's name as "Username"
           <p
             style={{
@@ -146,7 +142,7 @@ const SearchBar = () => {
               e.target.style.animationFillMode = "none";
             }}
           >
-            {userName}
+            {user}
           </p>
         ) : (
           // Display "Signup" when user.displayName is empty
@@ -174,7 +170,7 @@ const SearchBar = () => {
           onClick={navigateLogin}
           style={{ cursor: "pointer" }}
         >
-          {userName ? "Logout" : "Login"}
+          {user ? "Logout" : "Login"}
         </p>
       </NavbarBrand>
     </Navbar>

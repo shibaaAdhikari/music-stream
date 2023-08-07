@@ -1,12 +1,31 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Cardss from "../Cardss";
 import { Link } from "react-router-dom";
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
+import axios from "axios";
+
+// import { useRecoilValue } from "recoil";
+// import { songsState } from "../../Components/Recoil/Store";
 
 const CardContainer = (props) => {
+  // const songs = useRecoilValue(songsState);
   const dummyMusics = props.musics || [];
   const playlistData = props.playlistData || [];
+  const [albums, setAlbums] = useState([]); // State to store fetched albums data
 
+  useEffect(() => {
+    // Fetch albums data from the backend using axios
+    axios
+      .get("http://127.0.0.1:3000/api/albums/getAlbum") // Replace with your backend URL
+      .then((response) => {
+        console.log(response);
+        setAlbums(response.data); // Set the fetched albums data to the state
+      })
+      .catch((error) => {
+        console.error("Error fetching albums:", error);
+      });
+  }, []);
+  
   const [showAllMusics, setShowAllMusics] = useState(false);
   const [showAllPlaylist, setShowAllPlaylist] = useState(false);
 
@@ -88,9 +107,24 @@ const CardContainer = (props) => {
           >
             <Cardss
               image={music.image}
-              title={music.title}
+              title={music.song_name}
               album={music.album}
               color={music.color}
+            />
+          </Link>
+        ))}
+        {albums.map((album) => (
+          <Link
+            to={`/Album/${album.id}`}
+            state={album}
+            className="text-decoration-none"
+            key={album.id}
+          >
+            <Cardss
+              image={album.image}
+              title={album.title}
+              album={album.artist}
+              color={album.year}
             />
           </Link>
         ))}
