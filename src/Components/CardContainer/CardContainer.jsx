@@ -38,19 +38,19 @@ const CardContainer = ({ albumId, ...props }) => {
     setShowAllPlaylist(false);
   };
 
-  useEffect(() => {
-    const fetchAlbum = async () => {
-      try {
-        const response = await axios.get(
-          `http://localhost:3000/api/albums/${albumId}`
-        );
-        setAlbum(response.data);
-      } catch (error) {
-        console.error("Error fetching album:", error);
-      }
-    };
+    useEffect(() => {
+      const fetchAlbum = async () => {
+        try {
+          const response = await axios.get(
+            `http://localhost:3000/api/albums/${albumId}`
+          );
+          setAlbum(response.data);
+        } catch (error) {
+          console.error("Error fetching album:", error);
+        }
+      };
 
-    fetchAlbum();
+      fetchAlbum();
   }, [albumId]);
 
   if (!album) {
