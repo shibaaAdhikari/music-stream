@@ -12,6 +12,7 @@ const CardContainer = ({ albumId, ...props }) => {
   const dummyMusics = props.musics || [];
   const playlistData = props.playlistData || [];
   const [album, setAlbum] = useState(null);
+  console.log(album);
 
   const [showAllMusics, setShowAllMusics] = useState(false);
   const [showAllPlaylist, setShowAllPlaylist] = useState(false);
@@ -135,6 +136,7 @@ const CardContainer = ({ albumId, ...props }) => {
         {displayedPlaylist.map((playlist) => (
           <Link
             to={`/Album/${playlist.id}`}
+            y
             state={playlist}
             className="text-decoration-none"
             key={playlist.id}

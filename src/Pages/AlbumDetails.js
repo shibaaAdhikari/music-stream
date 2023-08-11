@@ -60,11 +60,8 @@ const Album = ({ albumId }) => {
           album.songs[0] &&
           album.songs[0].filePath.split("/").pop()
         }`}
-        autoPlay
       ></audio>
-      <button onClick={handlePlayPause}>
-        {isPlaying ? "Pause" : "Play"}
-      </button>
+      <button onClick={handlePlayPause}>{isPlaying ? "Pause" : "Play"}</button>
     </div>
   );
 };
