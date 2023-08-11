@@ -1,22 +1,35 @@
 import React from "react";
 import SelectedMusic from "./SelectedMusic/SelectedMusic";
-import { AiFillPlayCircle, AiOutlineHeart } from "react-icons/ai";
-import { BsThreeDots } from "react-icons/bs";
 import { Table } from "reactstrap";
 import { BiTime } from "react-icons/bi";
-import Songs from "../Data/songs.json";
+// import Songs from "../Data/songs.json";
 import { useLocation } from "react-router";
 import { Button } from "reactstrap";
-import { FaStepBackward, FaPlay, FaStepForward } from "react-icons/fa";
+import { FaStepBackward, FaPlay, FaStepForward, FaPause } from "react-icons/fa";
 import { useState } from "react";
 
 const AlbumList = () => {
   const location = useLocation();
   const music = location.state;
   const [selectedMusic, setSelectedMusic] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
 
   const handleMusicSelect = (music) => {
     setSelectedMusic(music);
+  };
+
+  const imageFileName = music.coverImage.split("/").pop();
+
+  const handlePlayPause = () => {
+    const audioElement = document.getElementById("audioPlayer");
+
+    if (!isPlaying) {
+      audioElement.play();
+    } else {
+      audioElement.pause();
+    }
+
+    setIsPlaying(!isPlaying);
   };
 
   return (
@@ -38,22 +51,7 @@ const AlbumList = () => {
         <div>
           <SelectedMusic music={music} />
         </div>
-        <div>
-          {/* <div className="container-fluid  ">
-            <AiFillPlayCircle
-              style={{ fontSize: "60px", color: "#D94919", marginLeft: "3%" }}
-              className="playbutton"
-            />
-            <AiOutlineHeart
-              style={{ fontSize: "40px", color: "gray", marginLeft: "15px" }}
-              className="heart"
-            />
-            <BsThreeDots
-              style={{ fontSize: "30px", color: "gray", marginLeft: "15px" }}
-              className="heart"
-            />
-          </div> */}
-        </div>
+        <div></div>
       </div>
 
       <Table
@@ -65,34 +63,23 @@ const AlbumList = () => {
           <tr>
             <th>#</th>
             <th>Title </th>
-            <th>Album</th>
-            <th>Date Added</th>
-            <th>
-              <BiTime />
-            </th>
+            <th>Type</th>
+            <th>Year</th>
           </tr>
         </thead>
         <tbody>
-          {Songs.songs.map((song, index) => (
-            <tr
-              key={index}
-              className="mb-2  "
-              onClick={() => handleMusicSelect(song)}
-            >
-              <th scope="row">{index + 1}</th>
-              <td className="gap-3">
-                <img
-                  src={song.image}
-                  style={{ width: "50px", paddingRight: "15px" }}
-                  alt="images"
-                />
-                {song.title}
-              </td>
-              <td>{song.album}</td>
-              <td>{song.date}</td>
-              <td>{song.duration}</td>
-            </tr>
-          ))}
+          <tr onClick={() => handleMusicSelect(music)}>
+            <td className="gap-3">
+              <img
+                src={`http://localhost:3000/songs/image/${imageFileName}`}
+                style={{ width: "50px", paddingRight: "15px" }}
+                alt="images"
+              />
+              {music.title}
+            </td>
+            <td>{music.type}</td>
+            <td>{music.year}</td>
+          </tr>
         </tbody>
       </Table>
       <div>
@@ -112,8 +99,8 @@ const AlbumList = () => {
               <Button color="dark" className="mx-4">
                 <FaStepBackward />
               </Button>
-              <Button color="success">
-                <FaPlay />
+              <Button color="success" onClick={handlePlayPause}>
+                {isPlaying ? <FaPause /> : <FaPlay />}
               </Button>
               <Button color="dark" className="mx-4">
                 <FaStepForward />
@@ -122,6 +109,15 @@ const AlbumList = () => {
           </div>
         )}
       </div>
+      <audio
+        id="audioPlayer"
+        src={`http://localhost:3000/songs/audio/${
+          music &&
+          music.songs &&
+          music.songs[0] &&
+          music.songs[0].filePath.split("/").pop()
+        }`}
+      ></audio>
     </div>
   );
 };
