@@ -3,10 +3,9 @@ import axios from "axios";
 
 const Album = ({ albumId }) => {
   const [album, setAlbum] = useState(null);
-  console.log(albumId);
+  const [isPlaying, setIsPlaying] = useState(false); // Track whether audio is playing
 
   useEffect(() => {
-    // Fetch album data by its ID when the component mounts or when albumId changes
     const fetchAlbum = async () => {
       try {
         const response = await axios.get(
@@ -21,37 +20,51 @@ const Album = ({ albumId }) => {
     fetchAlbum();
   }, [albumId]);
 
+  const handlePlayPause = () => {
+    const audioElement = document.getElementById("audioPlayer");
+
+    if (!isPlaying) {
+      audioElement.play();
+    } else {
+      audioElement.pause();
+    }
+
+    setIsPlaying(!isPlaying);
+  };
+
   if (!album) {
-    return <div>Loading...</div>;
+    return <div style={{ color: "white" }}>Loading...</div>;
   }
 
-  // Extract image and audio filenames from the URLs  
-  const imageFileName = album.image.split("/").pop();
-  const audioFileName = album.audio.split("/").pop();
+  const imageFileName = album.coverImage.split("/").pop();
 
   return (
-    <div>
+    <div style={{ color: "white" }}>
       <h2>{album.title}</h2>
       <p>Artist: {album.artist}</p>
       <p>Year: {album.year}</p>
       <h3>Songs:</h3>
-      <ul>
-        {album.songs.map((song) => (
-          <li key={song.id}>{song.title}</li>
-        ))}
-      </ul>
+
       <img
         src={`http://localhost:3000/songs/image/${imageFileName}`}
-        alt="Album Cover"
+        alt={imageFileName}
+        onError={(e) => {
+          console.error("Error loading image:", e);
+        }}
       />
-      <audio controls>
-        <source
-          src={`http://localhost:3000/songs/audio/${audioFileName}`}
-          type="audio/mpeg"
-        />
-        Your browser does not support the audio element.
-      </audio>
-      console.log(success)
+      <audio
+        id="audioPlayer"
+        src={`http://localhost:3000/songs/audio/${
+          album &&
+          album.songs &&
+          album.songs[0] &&
+          album.songs[0].filePath.split("/").pop()
+        }`}
+        autoPlay
+      ></audio>
+      <button onClick={handlePlayPause}>
+        {isPlaying ? "Pause" : "Play"}
+      </button>
     </div>
   );
 };

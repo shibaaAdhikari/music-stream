@@ -7,25 +7,12 @@ import axios from "axios";
 // import { useRecoilValue } from "recoil";
 // import { songsState } from "../../Components/Recoil/Store";
 
-const CardContainer = (props) => {
+const CardContainer = ({ albumId, ...props }) => {
   // const songs = useRecoilValue(songsState);
   const dummyMusics = props.musics || [];
   const playlistData = props.playlistData || [];
-  const [albums, setAlbums] = useState([]); // State to store fetched albums data
+  const [album, setAlbum] = useState(null);
 
-  useEffect(() => {
-    // Fetch albums data from the backend using axios
-    axios
-      .get("http://127.0.0.1:3000/api/albums/getAlbum") // Replace with your backend URL
-      .then((response) => {
-        console.log(response);
-        setAlbums(response.data); // Set the fetched albums data to the state
-      })
-      .catch((error) => {
-        console.error("Error fetching albums:", error);
-      });
-  }, []);
-  
   const [showAllMusics, setShowAllMusics] = useState(false);
   const [showAllPlaylist, setShowAllPlaylist] = useState(false);
 
@@ -50,6 +37,26 @@ const CardContainer = (props) => {
     setShowAllPlaylist(false);
   };
 
+  useEffect(() => {
+    const fetchAlbum = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/albums/${albumId}`
+        );
+        setAlbum(response.data);
+      } catch (error) {
+        console.error("Error fetching album:", error);
+      }
+    };
+
+    fetchAlbum();
+  }, [albumId]);
+
+  if (!album) {
+    return <div style={{ color: "white" }}>Loading...</div>;
+  }
+
+  const imageFileName = album.coverImage.split("/").pop();
   return (
     <div className="cards-container mt-3 mb-4">
       <div className="d-flex justify-content-between align-items-center mx-4 p-2">
@@ -113,21 +120,18 @@ const CardContainer = (props) => {
             />
           </Link>
         ))}
-        {albums.map((album) => (
-          <Link
-            to={`/Album/${album.id}`}
-            state={album}
-            className="text-decoration-none"
-            key={album.id}
-          >
-            <Cardss
-              image={album.image}
-              title={album.title}
-              album={album.artist}
-              color={album.year}
-            />
-          </Link>
-        ))}
+        <Link
+          to={`/Album/${album.id}`}
+          state={album}
+          className="text-decoration-none"
+          key={album.id}
+        >
+          <Cardss
+            title={album.title}
+            image={`http://localhost:3000/songs/image/${imageFileName}`}
+          />
+        </Link>
+
         {displayedPlaylist.map((playlist) => (
           <Link
             to={`/Album/${playlist.id}`}
