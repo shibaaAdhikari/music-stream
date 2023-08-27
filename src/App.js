@@ -16,9 +16,13 @@ import NewAlbum from "./Pages/Admin/NewAlbum";
 // import AudioUpload from "./Pages/Admin/SongsUpload/AudioUpload";
 import Artist from "./Pages/SignupArtist/SignupArtist";
 import AlbumDetails from "./Pages/AlbumDetails";
+import ArtistAdmin from "./Pages/ArtistAdmin/ArtistAdmin";
+import LikedSongs from "./Pages/LikedSongs/LikedSongs"
+import FeatureContainer from "./Pages/FeatureContainer/FeatureContainer";
+
 
 function App() {
-  const albumId = "65c1c903-b7cf-495d-8442-4438b42d96c3";
+  const albumId = "70d73a58-128e-4200-9597-9581fdf661d0";
   return (
     <>
       <div>
@@ -29,6 +33,8 @@ function App() {
             <Route path="/Features" element={<Features />}></Route>
             <Route path="/Album/:id" element={<AlbumList />}></Route>
             <Route path="/Playlist" element={<Playlist />}></Route>
+            <Route path="/likedSong" element={<LikedSongs/>}></Route>
+            <Route path="/FeatureContainer/:id" element={<FeatureContainer />}></Route>
           </Route>
           <Route path="/Signup" element={<Signup />} />
           <Route path="/Login" element={<Login />} />
@@ -36,7 +42,9 @@ function App() {
           <Route path="/upload" element={<SongsUpload />} />
           <Route path="/audioUpload" element={<NewAlbum />} />
           <Route path="*" element={<NotFound />} />
+          <Route path="/Admin" element={<ArtistAdmin/>}/>
           <Route path="/details" element={<AlbumDetails albumId={albumId} />} />
+        
         </Routes>
       </div>
     </>

@@ -5,12 +5,15 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
+import { AlbumDataProvider } from "./Components/MusicPlayer/MusicPlayer"
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <React.StrictMode>
       <RecoilRoot>
+      <AlbumDataProvider>
         <App />
+      </AlbumDataProvider>
       </RecoilRoot>
     </React.StrictMode>
   </BrowserRouter>

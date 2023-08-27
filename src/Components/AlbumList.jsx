@@ -1,22 +1,44 @@
-import React from "react";
+import React, { useState, useEffect , useRef} from "react";
 import SelectedMusic from "./SelectedMusic/SelectedMusic";
-import { Table } from "reactstrap";
-import { BiTime } from "react-icons/bi";
-// import Songs from "../Data/songs.json";
+import { Table, Button } from "reactstrap";
+import {
+  FaStepBackward,
+  FaPlay,
+  FaStepForward,
+  FaPause,
+  FaHeart,
+  FaRegHeart,
+} from "react-icons/fa";
 import { useLocation } from "react-router";
-import { Button } from "reactstrap";
-import { FaStepBackward, FaPlay, FaStepForward, FaPause } from "react-icons/fa";
-import { useState } from "react";
+
+
 
 const AlbumList = () => {
   const location = useLocation();
   const music = location.state;
   const [selectedMusic, setSelectedMusic] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [totalDuration, setTotalDuration] = useState(0);
+  const [likedSongs, setLikedSongs] = useState(
+    JSON.parse(localStorage.getItem("likedSongs")) || []
+  );
+  const cdImageRef = useRef(null);
 
   const handleMusicSelect = (music) => {
     setSelectedMusic(music);
   };
+
+  const handleLike = (songId) => {
+    if (!likedSongs.includes(songId)) {
+      const newLikedSongs = [...likedSongs, songId];
+      setLikedSongs(newLikedSongs);
+      localStorage.setItem("likedSongs", JSON.stringify(newLikedSongs));
+    }
+  };
+  
+
+  const isLiked = (songId) => likedSongs.includes(songId);
 
   const imageFileName = music.coverImage.split("/").pop();
 
@@ -30,10 +52,65 @@ const AlbumList = () => {
     }
 
     setIsPlaying(!isPlaying);
+
+    audioElement.addEventListener("timeupdate", updateProgress);
+    audioElement.addEventListener("ended", handleSongEnd);
+
+    const cdImageElement = cdImageRef.current;
+    if (cdImageElement) {
+      cdImageElement.style.animation = isPlaying
+        ? "rotate 15s infinite linear"
+        : "none";
+    }
   };
+  
+  
+
+  const updateProgress = () => {
+    const audioElement = document.getElementById("audioPlayer");
+    const progressBar = document.getElementById("progressBar");
+  
+    const progress = audioElement.currentTime / audioElement.duration;
+    progressBar.value = progress;
+  
+    const currentTime = Math.floor(audioElement.currentTime);
+    const totalDuration = Math.floor(audioElement.duration);
+    setCurrentTime(currentTime);
+    setTotalDuration(totalDuration);
+  };
+
+  const formatTime = (seconds) => {
+    const minutes = Math.floor(seconds / 60);
+    const secondsLeft = seconds % 60;
+    return `${minutes}:${secondsLeft < 10 ? "0" : ""}${secondsLeft}`;
+  };
+  const handleSongEnd = () => {
+    const audioElement = document.getElementById("audioPlayer");
+  
+    audioElement.removeEventListener("timeupdate", updateProgress);
+    audioElement.removeEventListener("ended", handleSongEnd);
+  
+    setIsPlaying(false);
+    setCurrentTime(0);
+    setTotalDuration(0);
+  
+    const cdImageElement = cdImageRef.current;
+    if (cdImageElement) {
+      cdImageElement.style.animation = "none";
+    }
+  };
+
+
+
+  
+  
+  useEffect(() => {
+    localStorage.setItem("likedSongs", JSON.stringify(likedSongs));
+  }, [likedSongs]);
 
   return (
     <div>
+      <div>
       <div
         style={{
           // backgroundColor: "#33343b",
@@ -49,37 +126,50 @@ const AlbumList = () => {
         className="mx-5 mt-4 "
       >
         <div>
-          <SelectedMusic music={music} />
+          <SelectedMusic music={music} isPlaying={isPlaying} />
         </div>
         <div></div>
       </div>
 
       <Table
         className="container-fluid  text-light  mt-5 mb-5 "
-        style={{ width: "90%" }}
+        style={{ width: "80%" }}
         borderless
       >
         <thead className="border-bottom">
           <tr>
-            <th>#</th>
+            {/* <th>#</th> */}
             <th>Title </th>
-            <th>Type</th>
+            <th>Artist</th>
+            <th>Gerne</th>
             <th>Year</th>
+            <th>Like</th>
           </tr>
         </thead>
         <tbody>
-          <tr onClick={() => handleMusicSelect(music)}>
-            <td className="gap-3">
-              <img
-                src={`http://localhost:3000/songs/image/${imageFileName}`}
-                style={{ width: "50px", paddingRight: "15px" }}
-                alt="images"
-              />
-              {music.title}
-            </td>
-            <td>{music.type}</td>
-            <td>{music.year}</td>
-          </tr>
+        <tr onClick={() => handleMusicSelect(music)}>
+  <td className="gap-3">
+    <img
+      src={`http://localhost:3000/songs/image/${imageFileName}`}
+      style={{ width: "50px", paddingRight: "15px" }}
+      alt="images"
+    />
+    {music.title}
+  </td>
+  <td>{music.artistId}</td>
+  <td>{music.type}</td>
+  <td>{music.year}</td>
+  <td>
+    <Button color="link" onClick={() => handleLike(music)}>
+      {isLiked(music) ? (
+        <FaHeart style={{ color: "red" }} /> 
+      ) : (
+        <FaRegHeart />  
+      )}
+    </Button>
+  </td>
+</tr>
+
         </tbody>
       </Table>
       <div>
@@ -95,17 +185,27 @@ const AlbumList = () => {
               width: "80%",
             }}
           >
-            <div className="text-center ">
-              <Button color="dark" className="mx-4">
-                <FaStepBackward />
-              </Button>
-              <Button color="success" onClick={handlePlayPause}>
-                {isPlaying ? <FaPause /> : <FaPlay />}
-              </Button>
-              <Button color="dark" className="mx-4">
-                <FaStepForward />
-              </Button>
-            </div>
+    
+            <div className="text-center">
+            <progress
+              id="progressBar"
+              value="0"
+              max="1"
+              style={{ width: "80%" }}
+            />
+            <p>
+              {formatTime(currentTime)} / {formatTime(totalDuration)}
+            </p>
+            <Button color="dark" className="mx-4">
+              <FaStepBackward />
+            </Button>
+            <Button color="success" onClick={handlePlayPause}>
+              {isPlaying ? <FaPause /> : <FaPlay />}
+            </Button>
+            <Button color="dark" className="mx-4">
+              <FaStepForward />
+            </Button> </div>
+
           </div>
         )}
       </div>
@@ -117,7 +217,9 @@ const AlbumList = () => {
           music.songs[0] &&
           music.songs[0].filePath.split("/").pop()
         }`}
-      ></audio>
+></audio>
+
+    </div>
     </div>
   );
 };

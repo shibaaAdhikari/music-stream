@@ -31,7 +31,7 @@ const SidenavBar = ({ children }) => {
       name: "Playlist",
     },
     {
-      path: "/Features",
+      path: "/LikedSong",
       icon: <CgCardHearts />,
       name: "Liked Song",
     },
