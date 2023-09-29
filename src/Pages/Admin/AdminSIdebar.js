@@ -1,37 +1,25 @@
 import React from "react";
 import { Nav, NavItem, NavLink } from "reactstrap";
-import { FaHome } from "react-icons/fa";
-import { BiSearch, BiLibrary } from "react-icons/bi";
-import { TbSquarePlus } from "react-icons/tb";
-import { CgCardHearts } from "react-icons/cg";
+import { FaUpload } from "react-icons/fa";
+import {AiFillDelete} from "react-icons/ai"
 import { Media } from "reactstrap";
-import Music from "../Assests/music3.png";
+import Music from "../../Assests/music3.png";
 import { useNavigate } from "react-router-dom";
 
 
-const SidenavBar = ({ children }) => {
+const AdminNavbar = ({ children }) => {
   const navigate = useNavigate();
   const menuItems = [
     {
-      path: "/",
-      icon: <FaHome />,
-      name: "Home",
+      path: "/admin/audioUpload",
+      icon: <FaUpload />,
+      name: "Upload Audio",
     },
     {
-      path: "/Features",
-      icon: <BiSearch />,
-      name: "Features",
-    },
-    {
-      path: "/Playlist",
-      icon: <TbSquarePlus />,
-      name: "Playlist",
-    },
-    {
-      path: "/LikedSong",
-      icon: <CgCardHearts />,
-      name: "Liked Song",
-    },
+      path: "/admin/audioData",
+      icon: <AiFillDelete />,
+      name: "Delete Songs",
+    }
   ];
 
   const handleItemClick = (path) => {
@@ -82,4 +70,4 @@ const SidenavBar = ({ children }) => {
   );
 };
 
-export default SidenavBar;
+export default AdminNavbar;

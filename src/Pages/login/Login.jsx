@@ -15,23 +15,57 @@ const Login = () => {
   // const setUsername = useSetRecoilState(usernameAtom);
 
   // Event handler for form submit
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     // Make an HTTP POST request to the backend login route
+  //     const response = await axios.post("http://127.0.0.1:3000/Login/login", {
+  //       username: email,
+  //       password,
+  //     });
+
+  //     // Handle the response based on the status
+  //     if (response.status === 200) {
+  //       // Login successful, perform necessary actions
+  //       localStorage.setItem("username", email);
+  //       console.log(response);
+  //       navigate("/");
+  //       // Redirect to the desired page or update the app state
+  //     } else {
+  //       // Login failed, display error message or perform necessary actions
+  //       console.log("Login failed");
+  //     }
+  //   } catch (error) {
+  //     // Handle any errors that occurred during the request
+  //     console.error(error);
+  //   }
+  // };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       // Make an HTTP POST request to the backend login route
       const response = await axios.post("http://127.0.0.1:3000/Login/login", {
         username: email,
         password,
       });
-
+  
       // Handle the response based on the status
       if (response.status === 200) {
-        // Login successful, perform necessary actions
+        // Check if the logged-in user is an admin
+        if (email === "admin") {
+          // Admin login, navigate to the admin route
+          navigate("/audioUpload");
+        } else {
+          // Regular user login, navigate to the default route
+          navigate("/");
+        }
+  
+        // Store the username in local storage or app state as needed
         localStorage.setItem("username", email);
         console.log(response);
-        navigate("/");
-        // Redirect to the desired page or update the app state
       } else {
         // Login failed, display error message or perform necessary actions
         console.log("Login failed");
@@ -41,6 +75,7 @@ const Login = () => {
       console.error(error);
     }
   };
+  
 
   return (
     <div>

@@ -5,15 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
-import { AlbumDataProvider } from "./Components/MusicPlayer/MusicPlayer"
+import { AlbumDataProvider } from "./Components/MusicPlayer/MusicPlayer";
+import { AlbumAdminDataProvider } from "./Pages/Admin/AlbumDataContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <React.StrictMode>
       <RecoilRoot>
-      <AlbumDataProvider>
-        <App />
-      </AlbumDataProvider>
+        <AlbumAdminDataProvider>
+          <AlbumDataProvider>
+            <App />
+          </AlbumDataProvider>
+        </AlbumAdminDataProvider>
       </RecoilRoot>
     </React.StrictMode>
   </BrowserRouter>
