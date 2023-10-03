@@ -28,11 +28,65 @@ const AlbumList = () => {
     setSelectedMusic(music);
   };
 
-  const handleLike = (songId) => {
-    if (!likedSongs.includes(songId)) {
-      const newLikedSongs = [...likedSongs, songId];
-      setLikedSongs(newLikedSongs);
-      localStorage.setItem("likedSongs", JSON.stringify(newLikedSongs));
+  // const handleLike = (songId) => {
+  //   if (!likedSongs.includes(songId)) {
+  //     const newLikedSongs = [...likedSongs, songId];
+  //     setLikedSongs(newLikedSongs);
+  //     localStorage.setItem("likedSongs", JSON.stringify(newLikedSongs));
+  //   }
+  // };
+  const handleLike = async (songId) => {
+    console.log(songId.id);
+    try {
+      const token = localStorage.getItem("token");
+
+      if (!isLiked(songId)) {
+        // Make a POST request to add the song to favorites
+        const response = await fetch(
+          "http://127.0.0.1:3000/api/favourites/addtofavourites",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`, // Include the JWT token here
+            },
+            body: JSON.stringify({ songId: songId.id }), // Send only the id
+          }
+        );
+
+        if (response.status === 200) {
+          console.log(response);
+          // Song added to favorites successfully
+          const newLikedSongs = [...likedSongs, songId.id];
+          setLikedSongs(newLikedSongs);
+        } else {
+          // Handle error response from the server
+          console.error("Failed to add song to favorites");
+        }
+      } else {
+        // Make a DELETE request to remove the song from favorites
+        const response = await fetch(
+          `http://127.0.0.1:3000/api/favourites/removefromfavourites/${songId.id}`,
+          {
+            // Use songId.id
+            method: "DELETE",
+            headers: {
+              Authorization: `Bearer ${token}`, // Include the JWT token here
+            },
+          }
+        );
+
+        if (response.status === 200) {
+          // Song removed from favorites successfully
+          const newLikedSongs = likedSongs.filter((id) => id !== songId.id);
+          setLikedSongs(newLikedSongs);
+        } else {
+          // Handle error response from the server
+          console.error("Failed to remove song from favorites");
+        }
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -42,23 +96,23 @@ const AlbumList = () => {
 
   const handlePlayPause = () => {
     const audioElement = document.getElementById("audioPlayer");
-  
+
     if (!isPlaying) {
       audioElement.play();
     } else {
       audioElement.pause();
     }
-  
+
     setIsPlaying(!isPlaying);
-  
+
     audioElement.addEventListener("timeupdate", updateProgress);
-    
+
     // Listen for the "ended" event to detect when the song finishes playing
     audioElement.addEventListener("ended", () => {
       handleSongEnd();
       incrementPlayCount(selectedMusic.id); // Increment play count when the song ends
     });
-  
+
     const cdImageElement = cdImageRef.current;
     if (cdImageElement) {
       cdImageElement.style.animation = isPlaying
@@ -66,8 +120,7 @@ const AlbumList = () => {
         : "none";
     }
   };
-  
-  
+
   const updateProgress = () => {
     const audioElement = document.getElementById("audioPlayer");
     const progressBar = document.getElementById("progressBar");
@@ -88,20 +141,19 @@ const AlbumList = () => {
   };
   const handleSongEnd = () => {
     const audioElement = document.getElementById("audioPlayer");
-  
+
     audioElement.removeEventListener("timeupdate", updateProgress);
     audioElement.removeEventListener("ended", handleSongEnd);
-  
+
     setIsPlaying(false);
     setCurrentTime(0);
     setTotalDuration(0);
-  
+
     const cdImageElement = cdImageRef.current;
     if (cdImageElement) {
       cdImageElement.style.animation = "none";
     }
   };
-  
 
   useEffect(() => {
     localStorage.setItem("likedSongs", JSON.stringify(likedSongs));
@@ -109,10 +161,11 @@ const AlbumList = () => {
 
   useEffect(() => {
     // Load play counts from localStorage
-    const storedPlayCounts = JSON.parse(localStorage.getItem("playCounts")) || {};
+    const storedPlayCounts =
+      JSON.parse(localStorage.getItem("playCounts")) || {};
     setPlayCounts(storedPlayCounts);
   }, []);
-  
+
   useEffect(() => {
     // Save play counts to localStorage whenever it changes
     localStorage.setItem("playCounts", JSON.stringify(playCounts));
@@ -123,7 +176,6 @@ const AlbumList = () => {
     newPlayCounts[songId] = (newPlayCounts[songId] || 0) + 1;
     setPlayCounts(newPlayCounts);
   };
-  
 
   return (
     <div>
@@ -186,7 +238,10 @@ const AlbumList = () => {
                   )}
                 </Button>
               </td>
-              <td> {playCounts[music.id] || 0} {/* Display the play count */}</td>
+              <td>
+                {" "}
+                {playCounts[music.id] || 0} {/* Display the play count */}
+              </td>
             </tr>
           </tbody>
         </Table>

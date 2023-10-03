@@ -33,13 +33,13 @@ function App() {
     <Route path="/Playlist" element={<Playlist />} />
     <Route path="/likedSong" element={<LikedSongs />} />
     <Route path="/FeatureContainer/:id" element={<FeatureContainer />} />
-    <Route path="/Signup" element={<Signup />} />
-    <Route path="/Login" element={<Login />} />
+ 
     <Route path="/SignupArtist" element={<Artist />} />
     <Route path="/details" element={<AlbumDetails albumId={albumId} />} />
     <Route path="*" element={<NotFound />} />
   </Route>
-
+  <Route path="/Signup" element={<Signup />} />
+    <Route path="/Login" element={<Login />} />
   {/* Admin Page Routes */}
   <Route path="/admin" element={<AdminPage />}>
     <Route path="/admin/audioUpload" element={<NewAlbum />} />

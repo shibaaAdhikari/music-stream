@@ -51,9 +51,11 @@ const Login = () => {
         username: email,
         password,
       });
-  
       // Handle the response based on the status
       if (response.status === 200) {
+        const userData = response.data; // Assuming your backend returns user data including ID
+      const userId = userData.id; 
+      console.log(userId)
         // Check if the logged-in user is an admin
         if (email === "admin") {
           // Admin login, navigate to the admin route
