@@ -3,21 +3,21 @@ import Cardss from "../Cardss";
 import { Link } from "react-router-dom";
 import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 import axios from "axios";
+import { useAlbumData } from '../MusicPlayer/MusicPlayer';
 
 // import { useRecoilValue } from "recoil";
 // import { songsState } from "../../Components/Recoil/Store";
 
 const CardContainer = ({ albumId, ...props }) => {
-  // const songs = useRecoilValue(songsState);
   const dummyMusics = props.musics || [];
   const playlistData = props.playlistData || [];
-  const [album, setAlbum] = useState(null);
-  console.log(album);
+  const album = useAlbumData();
+ 
+
 
   const [showAllMusics, setShowAllMusics] = useState(false);
   const [showAllPlaylist, setShowAllPlaylist] = useState(false);
 
-  const displayedMusics = showAllMusics ? dummyMusics : dummyMusics.slice(0, 7);
   const displayedPlaylist = showAllPlaylist
     ? playlistData
     : playlistData.slice(0, 7);
@@ -38,26 +38,13 @@ const CardContainer = ({ albumId, ...props }) => {
     setShowAllPlaylist(false);
   };
 
-    useEffect(() => {
-      const fetchAlbum = async () => {
-        try {
-          const response = await axios.get(
-            `http://localhost:3000/api/albums/${albumId}`
-          );
-          setAlbum(response.data);
-        } catch (error) {
-          console.error("Error fetching album:", error);
-        }
-      };
-
-      fetchAlbum();
-  }, [albumId]);
-
   if (!album) {
     return <div style={{ color: "white" }}>Loading...</div>;
   }
+  console.log(album); 
 
-  const imageFileName = album.coverImage.split("/").pop();
+  // const imageFileName = album.coverImage.split("/").pop();
+  
   return (
     <div className="cards-container mt-3 mb-4">
       <div className="d-flex justify-content-between align-items-center mx-4 p-2">
@@ -106,32 +93,24 @@ const CardContainer = ({ albumId, ...props }) => {
         )}
       </div>
       <div className="d-flex gap-3 md-4 sm-3 flex-wrap">
-        {displayedMusics.map((music) => (
-          <Link
-            to={`/Album/${music.id}`}
-            state={music}
-            className="text-decoration-none"
-            key={music.id}
-          >
-            <Cardss
-              image={music.image}
-              title={music.song_name}
-              album={music.album}
-              color={music.color}
-            />
-          </Link>
-        ))}
-        <Link
-          to={`/Album/${album.id}`}
-          state={album}
-          className="text-decoration-none"
-          key={album.id}
-        >
-          <Cardss
-            title={album.title}
-            image={`http://localhost:3000/songs/image/${imageFileName}`}
-          />
-        </Link>
+         {album.map((album) => {
+            const imageFileName = album.coverImage.split("/").pop();
+            const imageUrl = `http://localhost:3000/songs/image/${imageFileName}`;
+
+            return (
+              <Link
+                to={`/Album/${album.id}`}
+                state={album}
+                className="text-decoration-none"
+                key={album.id}
+              >
+                <Cardss
+                  title={album.title}
+                  image={imageUrl}
+                />
+              </Link>
+            );
+          })}
 
         {displayedPlaylist.map((playlist) => (
           <Link

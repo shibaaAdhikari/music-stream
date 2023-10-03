@@ -1,166 +1,104 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { Button, Form, Label, Input, Navbar, NavbarBrand } from "reactstrap";
-import { useNavigate } from "react-router-dom";
-import music from "../../Assests/music3.png";
+import { Label } from "reactstrap";
 
 const Artist = () => {
-  const navigate = useNavigate();
-  const [formData, setFormData] = useState({
-    email: "",
-    password: "",
-    username: "",
-    userType: "", // New field for user type (user/artist)
-  });
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [role, setRole] = useState("user"); // Default role
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post(
-        "http://127.0.0.1:3000/api/artists/signup",
-        formData
-      );
-      console.log(response.data); // Handle the response as needed
-      // Optionally, redirect the user to a different page or perform additional actions
-      navigate("/Login");
-    } catch (error) {
-      console.error(error.response.data); // Handle the error response
+    // Send signup data to your backend API using fetch or an HTTP library
+    const response = await fetch("http://127.0.0.1:3000/api/accounts/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, email, password, role }),
+    });
+
+    // Handle response
+    if (response.ok) {
+      const data = await response.json();
+
+      // Console log the token and success message
+      console.log("Token:", data.token);
+      console.log("Message:", data.message);
+
+      // Optionally, you can redirect the user to a different page here
+      // or show a success message to the user on the frontend
+    } else {
+      // Handle the case where signup failed (e.g., username or email already taken)
+      const errorData = await response.json();
+      console.error(errorData);
     }
   };
 
   return (
-    <>
-      <Navbar className="" style={{ backgroundColor: "black" }}>
-        <NavbarBrand href="/">
-          <img alt="logo" style={{ width: "20%" }} src={music} />
-        </NavbarBrand>
-      </Navbar>
-      <div
-        id="signup"
-        className="container mt-5 px-5 bg-black"
-        style={{
-          boxShadow: "0 4px 6px  rgba(214, 150, 76, 0.859)",
-          width: "30%",
-          borderRadius: "10px",
-          height: "60vh",
-        }}
-      >
-        <Form onSubmit={handleSubmit}>
-          <h1 className="text-light text-center mt-5 mb-5 pt-5">
-            {" "}
-            Artist Signin Page
-          </h1>
-          <div>
-            <div>
-              <Label
-                for="exampleEmail"
-                className="text-light"
-                style={{ fontSize: "15px", fontWeight: "bolder" }}
-              >
-                What's your email?
-              </Label>
-              <Input
-                type="email"
-                name="email"
-                id="exampleEmail"
-                placeholder="Enter your email"
-                className="InputField form-control"
-                value={formData.email}
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                required
-              />
-
-              <Label
-                for="examplePassword"
-                className="text-light"
-                style={{ fontSize: "15px", fontWeight: "bolder" }}
-              >
-                Create a Password
-              </Label>
-              <Input
-                type="password"
-                name="password"
-                id="examplePassword"
-                placeholder="Create a password"
-                className="InputField form-control"
-                value={formData.password}
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
-                required
-                minLength={6}
-              />
-
-              <Label
-                for="exampleProfileName"
-                className="text-light"
-                style={{ fontSize: "15px", fontWeight: "bolder" }}
-              >
-                What should we call you?
-              </Label>
-              <Input
-                type="text"
-                name="profileName"
-                id="exampleProfileName"
-                placeholder="Enter a profile name."
-                className="InputField form-control"
-                value={formData.username}
-                onChange={(e) =>
-                  setFormData({ ...formData, username: e.target.value })
-                }
-              />
-
-              {/* <Label
-                for="exampleUserType"
-                className="text-light"
-                style={{ fontSize: "15px", fontWeight: "bolder" }}
-              >
-                Are you a user or an artist?
-              </Label> */}
-              {/* <Input
-                type="select"
-                name="userType"
-                id="exampleUserType"
-                className="InputField form-control"
-                value={formData.userType}
-                onChange={(e) =>
-                  setFormData({ ...formData, userType: e.target.value })
-                }
-                required
-              >
-                <option value="">Select</option>
-                <option value="user">User</option>
-                <option value="artist">Artist</option>
-              </Input> */}
-
-              <p style={{ fontSize: "15px" }} className="text-light">
-                This appears on your profile.
-              </p>
-            </div>
-            <div className="d-flex justify-content-center">
-              <Button
-                className="signup-button mt-3 "
-                style={{ backgroundColor: "rgb(217, 73, 25)", width: "25%" }}
-                type="submit"
-              >
-                Sign up
-              </Button>
-            </div>
-            <p className="text-center text-light mb-3">
-              Have an account?{" "}
-              <span class="text-decoration-none">
-                <a href="/artist" className="text-white">
-                  Login
-                </a>
-              </span>
-            </p>
-          </div>
-        </Form>
+    <div
+    id="signup"
+    className="container mt-5 px-5 bg-black"
+    style={{
+      boxShadow: "0 4px 6px  rgba(214, 150, 76, 0.859)",
+      width: "30%",
+      borderRadius: "10px",
+      height: "60vh",
+    }}
+  >
+    <h2 className="text-light text-center mt-5 mb-5 pt-5">Sign Up</h2>
+    <form onSubmit={handleSubmit} className="text-light">
+      <div className="form-group">
+        <Label htmlFor="username">Username</Label>
+        <input
+          type="text"
+          className="form-control"
+          id="username"
+          placeholder="Username"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </div>
-    </>
+      <div className="form-group">
+        <Label htmlFor="email">What's your email?</Label>
+        <input
+          type="email"
+          className="form-control"
+          id="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+      </div>
+      <div className="form-group">
+        <Label htmlFor="password">Create a Password</Label>
+        <input
+          type="password"
+          className="form-control"
+          id="password"
+          placeholder="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </div>
+      <div className="form-group">
+        <Label htmlFor="userType">Are you a user or an artist?</Label>
+        <select
+          className="form-control"
+          id="userType"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        >
+          <option value="user">User</option>
+          <option value="artist">Artist</option>
+        </select>
+      </div>
+      <button  className="signup-button mt-3 "
+                style={{ backgroundColor: "rgb(217, 73, 25)", width: "25%" }}
+                type="submit">Sign Up</button>
+    </form>
+  </div>
   );
 };
 

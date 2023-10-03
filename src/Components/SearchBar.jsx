@@ -14,9 +14,19 @@ const SearchBar = () => {
     navigate("/Signup");
   };
   const navigateLogin = () => {
+    // Clear the token from localStorage when logging out
+    localStorage.removeItem("token");
     navigate("/Login");
-    localStorage.clear();
   };
+  
+  <p
+    className="bg-white text-black px-4 py-2 rounded-pill"
+    onClick={navigateLogin}
+    style={{ cursor: "pointer" }}
+  >
+    {user ? "Logout" : "Login"}
+  </p>
+  
 
   const currentLocation = useLocation();
   const hideInput = currentLocation.pathname === "/";

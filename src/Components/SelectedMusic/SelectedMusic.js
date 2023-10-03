@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 import cdImage from "../../Assests/cdcover.png";
 
 const SelectedMusic = ({ music }) => {
+  const cdImageRef = useRef(null);
   const rotationAnimation = `
     @keyframes rotate {
       from {
@@ -39,14 +40,14 @@ const SelectedMusic = ({ music }) => {
           transformOrigin: "center center",
         }}
       >
-        <img
+ <img
+          ref={cdImageRef}
           src={cdImage}
           alt="CD"
           className="cd-img "
           style={{
             width: "100%",
             height: "100%",
-            // transformOrigin: "center center",
           }}
         />
       </div>
