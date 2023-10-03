@@ -1,0 +1,61 @@
+{
+    "spotifyPlaylist": [
+      {
+        "id":"1",
+        "title": "Today's Top Hits",
+        "subTitle": "Eslabon Armado & Peso Pluma are on ...",
+        "image":"https://www.tunesfun.com/images/spotify-music-converter/today-top-hits.jpg",
+        "backgroundColor":"backgroundCOlor"
+      },
+      {
+        "id":"2",
+        "title": "RapCaviar",
+        "subTitle": "New music from Lill Baby,Gucci Mane..",
+        "image":"https://i.scdn.co/image/ab67706c0000da843edc54301248b254cd66e43f"
+      },
+      {
+        "id":"3",
+        "title": "All Out 2010s",
+        "subtitle": "The boggest songs of the 2010s.",
+        "image":"https://i.scdn.co/image/ab67706f00000002b0fe40a6e1692822f5a9d8f1"
+      },
+      {
+        "id":"4",
+        "title": "Rock Classic",
+        "subtitle": "ROck legends & epic songs that...",
+        "image":"https://www.listenspotify.com/uploaded_files/Thf_1534933306.jpg"
+      },
+      {
+        "id":"5",
+        "title": "Chill Hits",
+        "subtitle": "Kick back to the best new and recent new and recent chills hits ",
+        "image":"https://i.scdn.co/image/ab67706f0000000208ca740941aa65b5e205c361"
+      },
+      {
+        "id":"6",
+        "title": "VIVA LATINO",
+        "subtitle": "Today's top Latin's hits, elevendo nuestra..",
+        "image":"https://i.scdn.co/image/ab67706c0000da84bdc715829721e42a6065a44c"
+      },
+      {
+        "id":"7",
+        "title": "Mega Hit mix",
+        "subtitle": "Anurag Saikia, Raj Shekhar, Rekha Bhardwaj",
+        "image":"https://i.scdn.co/image/ab67706f00000002db32a17c1f5291b19317b62e"
+      },
+      {
+        "id":"7",
+        "title": "Mega Hit mix",
+        "subtitle": "Anurag Saikia, Raj Shekhar, Rekha Bhardwaj",
+        "image":"https://i.scdn.co/image/ab67706f00000002db32a17c1f5291b19317b62e"
+      }, {
+        "id":"7",
+        "title": "Mega Hit mix",
+        "subtitle": "Anurag Saikia, Raj Shekhar, Rekha Bhardwaj",
+        "image":"https://i.scdn.co/image/ab67706f00000002db32a17c1f5291b19317b62e"
+      }
+  
+      
+    ]
+    }
+  

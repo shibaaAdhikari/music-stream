@@ -1,0 +1,74 @@
+{
+  "songs": [
+    {
+      "title": "What Makes You Beautiful",
+      "image": "https://i.scdn.co/image/ab67616d0000b2734a5584795dc73860653a9a3e",
+      "album": "Take Me Home",
+      "duration": "3:45",
+      "date": "2023-05-12"
+    },
+    {
+      "title": "Story of My Life",
+      "image": "https://pics.filmaffinity.com/One_Direction_Story_of_My_Life_Music_Video-821538223-large.jpg",
+      "album": "Midnight Memories",
+      "duration": "4:12",
+      "date": "2023-05-10"
+    },
+    {
+      "title": "Best Song Ever",
+      "image": "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
+      "album": "Midnight Memories",
+      "duration": "2:57",
+      "date": "2023-05-08"
+    },
+    {
+      "title": "Steal My Girl",
+      "image": "https://i1.sndcdn.com/artworks-000132598634-ui94jo-t500x500.jpg",
+      "album": "Four",
+      "duration": "3:20",
+      "date": "2023-05-06"
+    },
+    {
+      "title": "Drag Me Down",
+      "album": "Made in the A.M.",
+      "image":"https://upload.wikimedia.org/wikipedia/en/3/34/One_Direction_-_Drag_Me_Down_%28Official_Single_Cover%29.png",
+      "duration": "4:30",
+      "date": "2023-05-04"
+    },
+    {
+      "title": "Perfect",
+      "image": "https://lyricalsansar.com/wp-content/uploads/2021/12/Perfect-Lyrics.jpg",
+      "album": "Made in the A.M.",
+      "duration": "3:10",
+      "date": "2023-05-02"
+    },
+    {
+      "title": "Night Changes",
+      "image": "https://c-cl.cdn.smule.com/rs-s35/arr/15/a0/4bd87e54-da45-47e2-91b5-1ff80a3cea08_1024.jpg",
+      "album": "Four",
+      "duration": "3:55",
+      "date": "2023-04-30"
+    },
+    {
+      "title": "History",
+      "image": "https://cdn.sanity.io/images/7g6d2cj1/production/81b67e7af332ce7e4b971bad24c892a114f06448-1000x667.jpg?h=667&q=70&auto=format",
+      "album": "Made in the A.M.",
+      "duration": "4:05",
+      "date": "2023-04-28"
+    },
+    {
+      "title": "One Thing",
+      "image": "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
+      "album": "Up All Night",
+      "duration": "3:48",
+      "date": "2023-04-26"
+    },
+    {
+      "title": "You & I",
+      "image": "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe",
+      "album": "Midnight Memories",
+      "duration": "4:18",
+      "date": "2023-04-24"
+    }
+  ]
+}

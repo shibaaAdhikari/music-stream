@@ -1,0 +1,147 @@
+{
+    "searchCards": [
+      {
+        "id": 1,
+        "title": "Podcasts",
+        "image": "https://i.scdn.co/image/567158eb895ad26718a814345af0fc43ee785ec5"
+      },
+      {
+        "id": 2,
+        "title": "Made for You",
+        "image": "https://t.scdn.co/images/ea364e99656e46a096ea1df50f581efe"
+      },
+      {
+        "id": 3,
+        "title": "Charts",
+        "image": "https://charts-images.scdn.co/assets/locale_en/regional/weekly/region_global_default.jpg"
+      },
+      {
+        "id": 4,
+        "title": "New Releases",
+        "image": "https://i.scdn.co/image/ab67706f000000027ea4d505212b9de1f72c5112"
+      },
+      {
+        "id": 5,
+        "title": "Discover",
+        "image": "https://t.scdn.co/images/d0fb2ab104dc4846bdc56d72b0b0d785.jpeg"
+      },
+      {
+        "id": 6,
+        "title": "Live Events",
+        "image": "https://concerts.spotifycdn.com/images/live-events_category-image.jpg"
+      },
+      {
+        "id": 7,
+        "title": "Pop",
+        "image": "https://t.scdn.co/media/derived/pop-274x274_447148649685019f5e2a03a39e78ba52_0_0_274_274.jpg"
+      },
+      {
+        "id": 8,
+        "title": "EQUAL",
+        "image": "https://i.scdn.co/image/ab67706f0000000284a1ec26f589f0d569805a07"
+      },
+      {
+        "id": 9,
+        "title": "Mood",
+        "image": "https://t.scdn.co/media/original/mood-274x274_976986a31ac8c49794cbdc7246fd5ad7_274x274.jpg"
+      },
+      {
+        "id": 10,
+        "title": "Decades",
+        "image": "https://t.scdn.co/images/4c8b58ab42b54296ad5379514d36edac"
+      },
+      {
+        "id": 11,
+        "title": "Hip-Hop",
+        "image": "https://t.scdn.co/media/original/hip-274_0a661854d61e29eace5fe63f73495e68_274x274.jpg"
+      },
+      {
+        "id": 12,
+        "title": "In the car",
+        "image": "https://i.scdn.co/image/ab67706f00000002ffa215be1a4c64e3cbf59d1e"
+      },
+      {
+        "id": 13,
+        "title": "Gaming",
+        "image": "https://i.scdn.co/image/ab67706f0000000221a2087747d946f16704b8af"
+      },
+      {
+        "id": 14,
+        "title": "Wellness",
+        "image": "https://t.scdn.co/images/3710b68657574bc79df14bd74629e5ac"
+      },
+      {
+        "id": 15,
+        "title": "League of Legends",
+        "image": "https://i.scdn.co/image/ab67706f000000025f0ff9251e3cfe641160dc31"
+      },
+      {
+        "id": 16,
+        "title": "Workout",
+        "image": "https://i.scdn.co/image/ab67706f000000029249b35f23fb596b6f006a15"
+      },
+      {
+        "id": 17,
+        "title": "Chill",
+        "image": "https://t.scdn.co/media/derived/chill-274x274_4c46374f007813dd10b37e8d8fd35b4b_0_0_274_274.jpg"
+      },
+      {
+        "id": 18,
+        "title": "Focus",
+        "image": "https://i.scdn.co/image/ab67706f00000002e4eadd417a05b2546e866934"
+      },
+      {
+        "id": 19,
+        "title": "Sleep",
+        "image": "https://i.scdn.co/image/ab67706f00000002b70e0223f544b1faa2e95ed0"
+      },
+      {
+        "id": 20,
+        "title": "Party",
+        "image": "https://t.scdn.co/images/fada056dcfd54cd28faf80d62b7059c6.jpeg    "
+      },
+      {
+        "id": 21,
+        "title": "Indie",
+        "image": "https://t.scdn.co/images/fe06caf056474bc58862591cd60b57fc.jpeg"
+      },
+      {
+        "id":22,
+        "title":"Metal",
+        "image":"https://i.scdn.co/image/ab67706f0000000285704160b49125ac95099ec8"
+      },
+      {
+        "id":23,
+        "title":"Rock",
+        "image":"https://t.scdn.co/media/derived/rock_9ce79e0a4ef901bbd10494f5b855d3cc_0_0_274_274.jpg"
+      },
+      {
+        "id":24,
+        "title":"Jazz",
+        "image":"https://t.scdn.co/images/568f37f1cab54136939d63bd1f59d40c"
+      },
+      {
+        "id":25,
+        "title":"Rock",
+        "image":"https://i.scdn.co/image/ab67706f000000025a051b0271d3e98edfdc4c09"
+      },
+      {
+        "id":26,
+        "title":"R&B",
+        "image":"https://i.scdn.co/image/ab67706f000000023c5a4aaf5df054a9beeb3d82"
+      },
+      {
+        "id":27,
+        "title":"Instrumental",
+        "image":"https://i.scdn.co/image/ab67706f000000028ed1a5002b96c2ea882541b2"
+      },
+      {
+        "id":28,
+        "title":"Romance",
+        "image":"https://i.scdn.co/image/ab67706f0000000213601d4833623a4d6b328e38"
+      }
+      
+
+    ]
+  }
+  

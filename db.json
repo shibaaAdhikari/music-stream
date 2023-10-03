@@ -1,0 +1,111 @@
+{
+  "songs": [
+    {
+      "id":"1",
+      "title": "The Axe",
+      "subTitle":"Peaceful piano to help you down,breathe, and relax.",
+      "artist": "Coldplay",
+      "album": "A Peaceful piano to help you down ...",
+      "duration": null,
+      "image":"https://english.onlinekhabar.com/wp-content/uploads/2022/09/The-Axe-Band-1024x1021.jpg" 
+    },
+    {
+      "title": "The Elements",
+      "subTitle":"Keep calm and focus with ambient and post-rock music.",
+      "artist": "Chirag Khadka",
+      "album": "Keep calm and focus with ambient...", 
+      "duration": null,
+      "image":"https://cdn2.fatsoma.com/media/W1siZiIsInB1YmxpYy8yMDIyLzkvMjYvMjEvNTMvMjMvMTY4LzdDNDgzNjAwLTM3NTMtNDE4QS04RTM4LThBNzkxQTFCREIwMC5qcGVnIl1d"
+      
+
+    },
+    {
+      "title": "Swoopna Suman",
+      "subTitle":"Focus with soft music in the background",
+      "artist": "Focus with soft study music in the...",
+      "album": "Focus with soft study music in the...",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab6761610000e5eb1e86e925048fdb35056a53d2"
+      
+    },
+    {
+      "title": "Narayan Gopal",
+      "subTitle": "Lounge and chill out music for your workday",
+      "album": "Lounge and chill out music...",
+      "duration": null,
+      "image":"https://4.bp.blogspot.com/-QqWRwyHzS5I/WJ6XwH8HohI/AAAAAAAABYQ/jdHLvkSoJ60iM3vZd511mbLOWcbgTfBFgCLcB/w640-h514/Narayan%2BGopal.jpg"
+     
+
+    },
+    {
+      "title": "Focus Flow",
+      "subTitle": "Uptempo instrumental hip hop beats.",
+      "album": "Uptempo instrumental hip hop beats.",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f00000002e435ce0a86a8b9dc24527618"
+    },
+    {
+      "title": "Beats to think to",
+      "subTitle": "Focus with deep techno and tech house.",
+      "album": "Focus with deep techno and tech house.",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f0000000296e08a91ef3c7a6e7bfaa9a6"
+    },
+    {
+      "title": "Reading Adventures",
+      "subTitle": "Gentle instrumental music to help you relax while you read.",
+      "album": "Gentle instrumental music to help....",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f00000002fee0aa7c6bfc815873e45f9e"
+    },
+    {
+      "title": "Bartika Eam Rai",
+      "artist": "Queen",
+      "album": "The Game (2011 Remaster)",
+      "duration": null,
+      "image":"https://myrepublica.nagariknetwork.com/uploads/media/bartika-eam-rai.jpg"
+    },
+    {
+      "title": "Arjit Singh",
+      "artist": "Taba Chake",
+      "album": "JioSaavn Live Anywhere By Taba Chake",
+      "duration": null,
+      "image":"https://filmfare.wwmindia.com/content/2022/apr/arijitsingh11650885572.jpg"
+    },
+    {
+      "title": "Beats to think to",
+      "artist": "Pritam, Mohit Chauhan",
+      "album": "Dil Toh Baccha Hai Ji",
+      "duration": null,
+      "image":"https://i.scdn.co/image/ab67706f0000000296e08a91ef3c7a6e7bfaa9a6"
+    },
+    {
+      "title": "Bartika Eam Rai",
+      "artist": "Queen",
+      "album": "The Game (2011 Remaster)",
+      "duration": null,
+      "image":"https://myrepublica.nagariknetwork.com/uploads/media/bartika-eam-rai.jpg"
+    },
+    {
+      "title": "Arjit Singh",
+      "artist": "Taba Chake",
+      "album": "JioSaavn Live Anywhere By Taba Chake",
+      "duration": null,
+      "image":"https://filmfare.wwmindia.com/content/2022/apr/arijitsingh11650885572.jpg"
+    },
+    {
+      "title": "Talor Shift",
+      "artist": "Pritam, Mohit Chauhan",
+      "album": "Dil Toh Baccha Hai Ji",
+      "duration": null,
+      "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRnHDWAfIHEyxJ_GD7zly6OYlGHcDgaV-GeWQ&usqp=CAU"
+    },
+    {
+      "title": "Sanam Puri",
+      "artist": "Taba Chake",
+      "album": "JioSaavn Live Anywhere By Taba Chake",
+      "duration": null,
+      "image":"https://e1.pxfuel.com/desktop-wallpaper/40/469/desktop-wallpaper-sanam-puri-bio-age-height-early-life-career-family-movies-sanam-puri.jpg"
+    }
+  ]
+  }
