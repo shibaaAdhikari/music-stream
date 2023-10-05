@@ -30,7 +30,7 @@ const Signup = () => {
       const data = await response.json();
 
 
-       localStorage.setItem("token", data.token);
+      localStorage.setItem("token", data.token);
        
       // Console log the token and success message
       console.log("Token:", data.token);

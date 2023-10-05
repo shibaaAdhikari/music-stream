@@ -1,83 +1,58 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Button, Form, Label, Input, Navbar, NavbarBrand } from "reactstrap";
 import { useNavigate } from "react-router-dom";
-// import { usernameAtom } from "../../Components/Recoil/Store";
-// import { useSetRecoilState } from "recoil";
 import "./Login.css";
 import music from "../../Assests/music3.png";
 
 const Login = () => {
-  // State variables for email and password
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [role, setRole] = useState(""); // State to store the selected role
   const navigate = useNavigate();
-  // const setUsername = useSetRecoilState(usernameAtom);
+  const [error, setError] = useState(""); // State for error messages
 
-  // Event handler for form submit
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   try {
-  //     // Make an HTTP POST request to the backend login route
-  //     const response = await axios.post("http://127.0.0.1:3000/Login/login", {
-  //       username: email,
-  //       password,
-  //     });
-
-  //     // Handle the response based on the status
-  //     if (response.status === 200) {
-  //       // Login successful, perform necessary actions
-  //       localStorage.setItem("username", email);
-  //       console.log(response);
-  //       navigate("/");
-  //       // Redirect to the desired page or update the app state
-  //     } else {
-  //       // Login failed, display error message or perform necessary actions
-  //       console.log("Login failed");
-  //     }
-  //   } catch (error) {
-  //     // Handle any errors that occurred during the request
-  //     console.error(error);
-  //   }
-  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     try {
-      // Make an HTTP POST request to the backend login route
-      const response = await axios.post("http://127.0.0.1:3000/Login/login", {
-        username: email,
-        password,
-      });
-      // Handle the response based on the status
+      const response = await axios.post(
+        "http://127.0.0.1:3000/api/accounts/signin",
+        {
+          username: email,
+          password,
+          role, // Include the role in the request body
+        }
+      );
+
       if (response.status === 200) {
-        const userData = response.data; // Assuming your backend returns user data including ID
-      const userId = userData.id; 
-      console.log(userId)
-        // Check if the logged-in user is an admin
+        const userData = response.data;
+        const userId = userData.id;
+
+        localStorage.setItem("username", email);
+
         if (email === "admin") {
-          // Admin login, navigate to the admin route
           navigate("/audioUpload");
         } else {
-          // Regular user login, navigate to the default route
           navigate("/");
         }
-  
-        // Store the username in local storage or app state as needed
-        localStorage.setItem("username", email);
-        console.log(response);
+        setError("");
       } else {
-        // Login failed, display error message or perform necessary actions
-        console.log("Login failed");
+        const errorMessage =
+          response.data.message ||
+          "Login failed. Please check your credentials.";
+        setError(errorMessage);
       }
+
     } catch (error) {
-      // Handle any errors that occurred during the request
       console.error(error);
+      setError("Login failed. Please check your credentials.");
     }
   };
-  
+
+
+
 
   return (
     <div>
@@ -128,6 +103,24 @@ const Login = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
 
+            <Label for="exampleRole" className="text-light">
+              Role
+            </Label>
+            <Input
+              type="select"
+              name="role"
+              id="exampleRole"
+              className="InputField"
+              value={role}
+              onChange={(e) => setRole(e.target.value)} // Update the role state
+            >
+              <option value="">Select Role</option>
+              <option value="user">User</option>
+              <option value="artist">Artist</option>
+            </Input>
+
+            {error && <p className="text-danger">{error}</p>}
+
             <div className="d-flex flex-column mb-5">
               <Button
                 className=" text-dark rounded-pill mb-5 mt-4 p-2"
@@ -136,9 +129,6 @@ const Login = () => {
               >
                 Login
               </Button>
-              <Label className="text-center text-light">
-                Forgot your password
-              </Label>
               <hr style={{ color: "white" }}></hr>
               <h6 className="text-center" style={{ color: "rgb(167,164,124)" }}>
                 Don't have an account?{" "}
@@ -152,3 +142,6 @@ const Login = () => {
 };
 
 export default Login;
+
+
+

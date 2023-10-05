@@ -3,15 +3,58 @@ import { FaHeart, FaRegHeart } from "react-icons/fa";
 import { Table, Button } from "reactstrap";
 
 const LikedSongs = () => {
-  const [likedSongs, setLikedSongs] = useState(JSON.parse(localStorage.getItem("likedSongs")) || []);
+  const [likedSongs, setLikedSongs] = useState([]);
 
-  const handleUnlike = (song) => {
-    setLikedSongs(likedSongs.filter((likedSong) => likedSong.id !== song.id));
+  // Function to fetch liked songs from the server
+  const fetchLikedSongs = async () => {
+    const username = localStorage.getItem("username"); // Assuming the username is stored in localStorage
+  
+    try {
+      const response = await fetch("http://127.0.0.1:3000/api/favourites/displayfavourites", {
+        method: "POST", // Change the method to POST
+        headers: {
+          "Content-Type": "application/json", // Set the content type
+        },
+        body: JSON.stringify({ username }), // Send the username in the request body
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        setLikedSongs(data.data); // Update state with liked songs data
+      } else {
+        console.error("Failed to fetch liked songs.");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
   };
+  
+
+  // Function to remove a song from liked songs
+  // const removeLikedSong = async (songId) => {
+  //   try {
+  //     const response = await fetch(`http://localhost:3000/api/favourites/remove/${songId}`, {
+  //       method: "DELETE",
+  //       headers: {
+  //         // Add your headers here if needed (e.g., authorization token)
+  //       },
+  //     });
+
+  //     if (response.ok) {
+  //       // Remove the song from the state
+  //       setLikedSongs((prevLikedSongs) => prevLikedSongs.filter((song) => song.songId !== songId));
+  //     } else {
+  //       console.error("Failed to remove the song from liked songs.");
+  //     }
+  //   } catch (error) {
+  //     console.error("An error occurred:", error);
+  //   }
+  // };
 
   useEffect(() => {
-    localStorage.setItem("likedSongs", JSON.stringify(likedSongs));
-  }, [likedSongs]);
+    // Fetch liked songs when the component mounts
+    fetchLikedSongs();
+  }, []);
 
   return (
     <div className="liked-songs-container">
@@ -28,25 +71,20 @@ const LikedSongs = () => {
           </thead>
           <tbody>
             {likedSongs.map((song, index) => {
-              const imageFileName = song.coverImage.split("/").pop();
-              const imageUrl = `http://localhost:3000/songs/image/${imageFileName}`;
-
+              // Add your rendering logic here based on the likedSongs data
               return (
-                <tr key={song.id}>
+                <tr key={song.songId}>
                   <td style={{ color: "white" }}>{index + 1}</td>
-                  <td style={{ color: "white", verticalAlign: "middle" }}>
-                    <img src={imageUrl} alt={song.title} style={{ width: "80px", height: "80px" }} />
-                    <span style={{ marginLeft: "10px" }}>{song.title}</span>
-                  </td>
-                  <td style={{ color: "white" }}>{song.artistId}</td>
+                  <td style={{ color: "white" }}>{song.songTitle}</td>
+                  <td style={{ color: "white" }}>{song.title}</td>
                   <td>
                     <Button
                       color="link"
-                      onClick={() => handleUnlike(song)}
+                      // onClick={() => removeLikedSong(song.songId)}
                       className="heart-button"
-                      style={{ color: "red" }} // Set the color to red
+                      style={{ color: "red" }}
                     >
-                      {song.isLiked ? <FaRegHeart /> : <FaHeart />}
+                      <FaHeart />
                     </Button>
                   </td>
                 </tr>

@@ -6,10 +6,12 @@ import {
   FaPlay,
   FaStepForward,
   FaPause,
-  FaHeart,
   FaRegHeart,
+  FaHeart,
 } from "react-icons/fa";
 import { useLocation } from "react-router";
+import axios from "axios";
+import { useAlbumData } from '../Components/MusicPlayer/MusicPlayer';
 
 const AlbumList = () => {
   const location = useLocation();
@@ -19,78 +21,60 @@ const AlbumList = () => {
   const [currentTime, setCurrentTime] = useState(0);
   const [totalDuration, setTotalDuration] = useState(0);
   const [playCounts, setPlayCounts] = useState({});
-  const [likedSongs, setLikedSongs] = useState(
-    JSON.parse(localStorage.getItem("likedSongs")) || []
-  );
+  const [favorites, setFavorites] = useState(
+    JSON.parse(localStorage.getItem("favorites")) || {}
+  );  const [isFavorited, setIsFavorited] = useState(false);
   const cdImageRef = useRef(null);
+  const album = useAlbumData();
+  console.log(album);
+const addSongToFavorites = async (songId, title, songTitle) => {
+    const username = localStorage.getItem("username"); // Assuming the username is stored in localStorage
+  
+    try {
+      const response = await axios.post(
+        `http://localhost:3000/api/favourites/addtofavourites/${songId}`,
+        { username, title, songTitle }, // Send the username, title, and songTitle in the request body
+        {
+          headers: {
+            "Content-Type": "application/json", // Set the content type
+          },
+        }
+      );
+  
+      if (response.status === 200) {
+        // Handle success, e.g., show a success message
+        console.log("Song added to favorites!");
+      } else {
+        // Handle error, e.g., show an error message
+        console.error("Failed to add song to favorites.");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  
+    // Update the local state
+    setIsFavorited(true);
+  
+    // Update localStorage with the new favorites
+    const updatedFavorites = { ...favorites };
+    updatedFavorites[songId] = music;
+    localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  };
+  
+  
+
+  const handleToggleFavorite = () => {
+    if (isFavorited) {
+      // If it's already favorited, do nothing
+      return;
+    }
+    addSongToFavorites(music.id, music.title, music.artistId); // Call the function to add the song to favorites
+    setIsFavorited(true); // Update the local state to indicate that it's favorited
+  };
 
   const handleMusicSelect = (music) => {
     setSelectedMusic(music);
   };
-
-  // const handleLike = (songId) => {
-  //   if (!likedSongs.includes(songId)) {
-  //     const newLikedSongs = [...likedSongs, songId];
-  //     setLikedSongs(newLikedSongs);
-  //     localStorage.setItem("likedSongs", JSON.stringify(newLikedSongs));
-  //   }
-  // };
-  const handleLike = async (songId) => {
-    console.log(songId.id);
-    try {
-      const token = localStorage.getItem("token");
-
-      if (!isLiked(songId)) {
-        // Make a POST request to add the song to favorites
-        const response = await fetch(
-          "http://127.0.0.1:3000/api/favourites/addtofavourites",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`, // Include the JWT token here
-            },
-            body: JSON.stringify({ songId: songId.id }), // Send only the id
-          }
-        );
-
-        if (response.status === 200) {
-          console.log(response);
-          // Song added to favorites successfully
-          const newLikedSongs = [...likedSongs, songId.id];
-          setLikedSongs(newLikedSongs);
-        } else {
-          // Handle error response from the server
-          console.error("Failed to add song to favorites");
-        }
-      } else {
-        // Make a DELETE request to remove the song from favorites
-        const response = await fetch(
-          `http://127.0.0.1:3000/api/favourites/removefromfavourites/${songId.id}`,
-          {
-            // Use songId.id
-            method: "DELETE",
-            headers: {
-              Authorization: `Bearer ${token}`, // Include the JWT token here
-            },
-          }
-        );
-
-        if (response.status === 200) {
-          // Song removed from favorites successfully
-          const newLikedSongs = likedSongs.filter((id) => id !== songId.id);
-          setLikedSongs(newLikedSongs);
-        } else {
-          // Handle error response from the server
-          console.error("Failed to remove song from favorites");
-        }
-      }
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const isLiked = (songId) => likedSongs.includes(songId);
 
   const imageFileName = music.coverImage.split("/").pop();
 
@@ -139,6 +123,7 @@ const AlbumList = () => {
     const secondsLeft = seconds % 60;
     return `${minutes}:${secondsLeft < 10 ? "0" : ""}${secondsLeft}`;
   };
+
   const handleSongEnd = () => {
     const audioElement = document.getElementById("audioPlayer");
 
@@ -156,10 +141,6 @@ const AlbumList = () => {
   };
 
   useEffect(() => {
-    localStorage.setItem("likedSongs", JSON.stringify(likedSongs));
-  }, [likedSongs]);
-
-  useEffect(() => {
     // Load play counts from localStorage
     const storedPlayCounts =
       JSON.parse(localStorage.getItem("playCounts")) || {};
@@ -170,6 +151,12 @@ const AlbumList = () => {
     // Save play counts to localStorage whenever it changes
     localStorage.setItem("playCounts", JSON.stringify(playCounts));
   }, [playCounts]);
+
+  useEffect(() => {
+    // Load favorites from localStorage
+    const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || {};
+    setFavorites(storedFavorites);
+  }, []);
 
   const incrementPlayCount = (songId) => {
     const newPlayCounts = { ...playCounts };
@@ -182,7 +169,6 @@ const AlbumList = () => {
       <div>
         <div
           style={{
-            // backgroundColor: "#33343b",
             backgroundImage:
               "linear-gradient(170deg, #221f1e 0%, #beb09e69 46%, #5b3d34 100%)",
             paddingBottom: "20px",
@@ -207,10 +193,9 @@ const AlbumList = () => {
         >
           <thead className="border-bottom">
             <tr>
-              {/* <th>#</th> */}
               <th>Title </th>
               <th>Artist</th>
-              <th>Gerne</th>
+              <th>Genre</th>
               <th>Year</th>
               <th>Like</th>
               <th>Playcount</th>
@@ -230,18 +215,15 @@ const AlbumList = () => {
               <td>{music.type}</td>
               <td>{music.year}</td>
               <td>
-                <Button color="link" onClick={() => handleLike(music)}>
-                  {isLiked(music) ? (
-                    <FaHeart style={{ color: "red" }} />
+                <Button color="link" onClick={handleToggleFavorite}>
+                {favorites[music.id] ? (
+                    <FaHeart color="red" />
                   ) : (
-                    <FaRegHeart />
+                    <FaHeart />
                   )}
                 </Button>
               </td>
-              <td>
-                {" "}
-                {playCounts[music.id] || 0} {/* Display the play count */}
-              </td>
+              <td>{playCounts[music.id] || 0}</td>
             </tr>
           </tbody>
         </Table>

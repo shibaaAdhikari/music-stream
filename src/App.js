@@ -17,6 +17,7 @@ import LikedSongs from "./Pages/LikedSongs/LikedSongs";
 import FeatureContainer from "./Pages/FeatureContainer/FeatureContainer";
 import AdminPage from "./Pages/Admin/AdminPage";
 import SongsDetails from "./Pages/Admin/SongsDetails";
+import { TokenRefreshProvider } from "./Components/Auth/TokenRefreshContext";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
 
   return (
     <>
+    <TokenRefreshProvider> 
     <Routes>
   {/* Main Page Routes */}
   <Route path="/" element={<Mainpage />}>
@@ -32,7 +34,7 @@ function App() {
     <Route path="/Album/:id" element={<AlbumList />} />
     <Route path="/Playlist" element={<Playlist />} />
     <Route path="/likedSong" element={<LikedSongs />} />
-    <Route path="/FeatureContainer/:id" element={<FeatureContainer />} />
+    <Route path="/FeatureContainer/:genre" element={<FeatureContainer />} />
  
     <Route path="/SignupArtist" element={<Artist />} />
     <Route path="/details" element={<AlbumDetails albumId={albumId} />} />
@@ -49,6 +51,7 @@ function App() {
   {/* Redirect to the main page when no matching routes are found */}
   <Route path="/*" element={<Navigate to="/" />} />
 </Routes>
+</TokenRefreshProvider>
 
     </>
   );
