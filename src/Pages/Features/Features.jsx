@@ -24,8 +24,8 @@ const Features = () => {
         {/* {features.searchCards.map((feature) => ( */}
         {filteredFeatures.map((feature) => (
           <Link
-            to={`/FeatureContainer/${feature.id}`}
-            key={feature.id}
+            to={`/FeatureContainer/${feature.title}`}
+            key={feature.title}
             className="text-decoration-none text-light"
           >
             <SearchCard

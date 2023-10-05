@@ -14,19 +14,11 @@ const SearchBar = () => {
     navigate("/Signup");
   };
   const navigateLogin = () => {
-    // Clear the token from localStorage when logging out
+    // Clear the token and username from localStorage when logging out
     localStorage.removeItem("token");
+    localStorage.removeItem("username");
     navigate("/Login");
   };
-  
-  <p
-    className="bg-white text-black px-4 py-2 rounded-pill"
-    onClick={navigateLogin}
-    style={{ cursor: "pointer" }}
-  >
-    {user ? "Logout" : "Login"}
-  </p>
-  
 
   const currentLocation = useLocation();
   const hideInput = currentLocation.pathname === "/";
@@ -48,7 +40,6 @@ const SearchBar = () => {
   return (
     <Navbar
       className="container-fluid d-flex sticky-top text-center justify-content-center align-items-center"
-      // color="black"
       style={{ backgroundColor: "#000000" }}
       dark
     >
