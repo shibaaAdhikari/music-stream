@@ -1,134 +1,73 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Cardss from "../Cardss";
 import { Link } from "react-router-dom";
-import { FaAngleDoubleDown, FaAngleDoubleUp } from "react-icons/fa";
 import axios from "axios";
 import { useAlbumData } from '../MusicPlayer/MusicPlayer';
 
-// import { useRecoilValue } from "recoil";
-// import { songsState } from "../../Components/Recoil/Store";
-
 const CardContainer = ({ albumId, ...props }) => {
-  const dummyMusics = props.musics || [];
-  const playlistData = props.playlistData || [];
   const album = useAlbumData();
- 
-
-
-  const [showAllMusics, setShowAllMusics] = useState(false);
-  const [showAllPlaylist, setShowAllPlaylist] = useState(false);
-
-  const displayedPlaylist = showAllPlaylist
-    ? playlistData
-    : playlistData.slice(0, 7);
-
-  const handleShowAllMusics = () => {
-    setShowAllMusics(true);
-  };
-
-  const handleShowLessMusics = () => {
-    setShowAllMusics(false);
-  };
-
-  const handleShowAllPlaylist = () => {
-    setShowAllPlaylist(true);
-  };
-
-  const handleShowLessPlaylist = () => {
-    setShowAllPlaylist(false);
-  };
+  const [showAllAlbums, setShowAllAlbums] = useState(false);
 
   if (!album) {
     return <div style={{ color: "white" }}>Loading...</div>;
   }
-  console.log(album); 
 
-  // const imageFileName = album.coverImage.split("/").pop();
-  
+  // Define the number of albums to display initially and when "Show All" is clicked
+  const albumsToShow = showAllAlbums ? album.length : 7;
+
+  const handleShowAllAlbums = () => {
+    setShowAllAlbums(true);
+  };
+
+  const handleShowLessAlbums = () => {
+    setShowAllAlbums(false);
+  };
+
   return (
     <div className="cards-container mt-3 mb-4">
       <div className="d-flex justify-content-between align-items-center mx-4 p-2">
         <h4 className="text-white fw-bold">{props.containerTitle}</h4>
-
-        {!showAllMusics && dummyMusics.length > 7 && (
+        
+        {!showAllAlbums && album.length > 7 && (
           <p>
             <button
               className="text-white link fw-bold btn btn-link"
-              onClick={handleShowAllMusics}
+              onClick={handleShowAllAlbums}
             >
-              Show all <FaAngleDoubleDown />
+              Show all
             </button>
           </p>
         )}
-        {showAllMusics && (
+        {showAllAlbums && (
           <p>
             <button
               className="text-white link fw-bold btn btn-link"
-              onClick={handleShowLessMusics}
+              onClick={handleShowLessAlbums}
             >
-              Show less <FaAngleDoubleUp />
-            </button>
-          </p>
-        )}
-
-        {!showAllPlaylist && playlistData.length > 7 && (
-          <p>
-            <button
-              className="text-white link fw-bold btn btn-link"
-              onClick={handleShowAllPlaylist}
-            >
-              Show all <FaAngleDoubleDown />
-            </button>
-          </p>
-        )}
-        {showAllPlaylist && (
-          <p>
-            <button
-              className="text-white link fw-bold btn btn-link"
-              onClick={handleShowLessPlaylist}
-            >
-              Show less <FaAngleDoubleUp />
+              Show less
             </button>
           </p>
         )}
       </div>
       <div className="d-flex gap-3 md-4 sm-3 flex-wrap">
-         {album.map((album) => {
-            const imageFileName = album.coverImage.split("/").pop();
-            const imageUrl = `http://localhost:3000/songs/image/${imageFileName}`;
+        {album.slice(0, albumsToShow).map((album) => {
+          const imageFileName = album.coverImage.split("/").pop();
+          const imageUrl = `http://localhost:3000/songs/image/${imageFileName}`;
 
-            return (
-              <Link
-                to={`/Album/${album.id}`}
-                state={album}
-                className="text-decoration-none"
-                key={album.id}
-              >
-                <Cardss
-                  title={album.title}
-                  image={imageUrl}
-                />
-              </Link>
-            );
-          })}
-
-        {displayedPlaylist.map((playlist) => (
-          <Link
-            to={`/Album/${playlist.id}`}
-            y
-            state={playlist}
-            className="text-decoration-none"
-            key={playlist.id}
-          >
-            <Cardss
-              key={playlist.id}
-              image={playlist.image}
-              title={playlist.title}
-              subTitle={playlist.subTitle}
-              backgroundColor={playlist.backgroundColor}
-            />
-          </Link>
-        ))}
+          return (
+            <Link
+              to={`/Album/${album.id}`}
+              state={album}
+              className="text-decoration-none"
+              key={album.id}
+            >
+              <Cardss
+                title={album.title}
+                image={imageUrl}
+              />
+            </Link>
+          );
+        })}
       </div>
     </div>
   );

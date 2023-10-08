@@ -7,7 +7,6 @@ import Login from "../src/Pages/login/Login";
 import Signup from "./Pages/SignuP/Signup";
 import Features from "./Pages/Features/Features";
 import Home from "./Pages/Homepage/Home";
-import Playlist from "./Pages/Playlist/Playlist";
 import AlbumList from "./Components/AlbumList";
 import NotFound from "./Pages/PageNotFound/NotFound";
 import NewAlbum from "./Pages/Admin/NewAlbum";
@@ -18,6 +17,8 @@ import FeatureContainer from "./Pages/FeatureContainer/FeatureContainer";
 import AdminPage from "./Pages/Admin/AdminPage";
 import SongsDetails from "./Pages/Admin/SongsDetails";
 import { TokenRefreshProvider } from "./Components/Auth/TokenRefreshContext";
+import TrendingSongsCardContainer from "./Components/CardContainer/TrendingSongsCardContainer";
+
 
 
 function App() {
@@ -32,9 +33,9 @@ function App() {
     <Route index element={<Home />} />
     <Route path="/Features" element={<Features />} />
     <Route path="/Album/:id" element={<AlbumList />} />
-    <Route path="/Playlist" element={<Playlist />} />
     <Route path="/likedSong" element={<LikedSongs />} />
     <Route path="/FeatureContainer/:genre" element={<FeatureContainer />} />
+    <Route path="/Trending" element={<TrendingSongsCardContainer />} />
  
     <Route path="/SignupArtist" element={<Artist />} />
     <Route path="/details" element={<AlbumDetails albumId={albumId} />} />

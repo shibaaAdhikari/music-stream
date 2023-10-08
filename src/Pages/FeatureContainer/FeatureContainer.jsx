@@ -5,15 +5,14 @@ import { Table } from "reactstrap";
 const FeatureContainer = () => {
   // Access the genre parameter from the URL
   const { genre } = useParams();
-  console.log(genre)
 
   // State to store the fetched songs
   const [songs, setSongs] = useState([]);
+  const [currentSong, setCurrentSong] = useState(null); // State to track the currently playing song
 
   useEffect(() => {
     // Define the API endpoint to fetch songs by genre
     const apiUrl = `http://127.0.0.1:3000/api/albums/genre/${genre}`;
-
 
     // Fetch songs from the API
     fetch(apiUrl)
@@ -38,8 +37,13 @@ const FeatureContainer = () => {
       });
   }, [genre]);
 
-  // Debugging: Log the value of the songs variable before mapping
-  console.log("Songs:", songs);
+  // Function to handle play button click
+  const handlePlayClick = (song) => {
+    setCurrentSong(song); // Set the current song to the one clicked
+    const audioPlayer = document.getElementById("audioPlayer");
+    audioPlayer.src = `http://localhost:3000/songs/audio/${song.filePath.split("/").pop()}`;
+    audioPlayer.play(); // Play the audio
+  };
 
   return (
     <div style={{ textAlign: "center", color: "white" }}>
@@ -47,19 +51,31 @@ const FeatureContainer = () => {
       <Table style={{ width: "80%", color: "white", margin: "0 auto" }}>
         <thead>
           <tr>
-            <th>Title</th>
-            <th>Artist</th>
+            <th>Song Name</th>
+            <th>Artist Name</th>
+            <th>Play</th> {/* Add a new column for play button */}
           </tr>
         </thead>
         <tbody>
           {songs.map((song) => (
-            <tr key={song.id}>
+            <tr key={song.songId}>
               <td>{song.songTitle}</td>
-              <td>{song.artist}</td>
+              <td>{song.artistId}</td>
+              <td>
+                {/* Add a play button */}
+                <button onClick={() => handlePlayClick(song)}>Play</button>
+              </td>
             </tr>
           ))}
         </tbody>
       </Table>
+      {/* Display the currently playing song, if any */}
+      {currentSong && <div>Now Playing: {currentSong.songTitle}</div>}
+      <audio
+        id="audioPlayer"
+        src=""
+        controls // Add the controls attribute for playback control
+      ></audio>
     </div>
   );
 };

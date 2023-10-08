@@ -36,6 +36,22 @@ const searchFunction = atom({
   default: "",
 });
 
+const playCountsState = atom({
+  key: "playCountsState",
+  default: {},
+});
+
+const songsWithPlayCountsState = atom({
+  key: "songsWithPlayCountsState",
+  default: [],
+});
+const trendingSongsState = atom({
+  key: "trendingSongs",
+  default: [], // Initial empty array
+});
+
+// Define a selector to fetch the combined data
+
 export {
   musicState,
   PlayList,
@@ -43,6 +59,9 @@ export {
   searchFunction,
   songsState,
   usernameAtom,
+  playCountsState,
+  songsWithPlayCountsState,
+  trendingSongsState,
 };
 
 // export const musics = selector({

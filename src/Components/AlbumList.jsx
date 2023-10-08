@@ -11,7 +11,7 @@ import {
 } from "react-icons/fa";
 import { useLocation } from "react-router";
 import axios from "axios";
-import { useAlbumData } from '../Components/MusicPlayer/MusicPlayer';
+import { useAlbumData } from "../Components/MusicPlayer/MusicPlayer";
 
 const AlbumList = () => {
   const location = useLocation();
@@ -23,53 +23,68 @@ const AlbumList = () => {
   const [playCounts, setPlayCounts] = useState({});
   const [favorites, setFavorites] = useState(
     JSON.parse(localStorage.getItem("favorites")) || {}
-  );  const [isFavorited, setIsFavorited] = useState(false);
+  );
+  const [isFavorited, setIsFavorited] = useState(false);
   const cdImageRef = useRef(null);
   const album = useAlbumData();
-  console.log(album);
-const addSongToFavorites = async (songId, title, songTitle) => {
+
+  const addSongToFavorites = async (songId, title, songTitle) => {
     const username = localStorage.getItem("username"); // Assuming the username is stored in localStorage
-  
+
     try {
       const response = await axios.post(
         `http://localhost:3000/api/favourites/addtofavourites/${songId}`,
-        { username, title, songTitle }, // Send the username, title, and songTitle in the request body
+        { username, title, songTitle },
         {
           headers: {
-            "Content-Type": "application/json", // Set the content type
+            "Content-Type": "application/json",
           },
         }
       );
-  
+
       if (response.status === 200) {
-        // Handle success, e.g., show a success message
         console.log("Song added to favorites!");
       } else {
-        // Handle error, e.g., show an error message
         console.error("Failed to add song to favorites.");
       }
     } catch (error) {
       console.error("An error occurred:", error);
     }
-  
-    // Update the local state
+
     setIsFavorited(true);
-  
-    // Update localStorage with the new favorites
+
     const updatedFavorites = { ...favorites };
     updatedFavorites[songId] = music;
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
-  
-  
+
+  const incrementPlayCountOnServer = async (songId) => {
+    try {
+      const response = await axios.post(
+        `http://127.0.0.1:3000/api/playcounts/increment-play-count/${songId}`
+      );
+
+      if (response.status === 200) {
+        console.log("Play count incremented!");
+        // Update the playCounts state with the updated value from the server
+        const updatedPlayCounts = { ...playCounts };
+        updatedPlayCounts[songId] =
+          (updatedPlayCounts[songId] || 0) + 1;
+        setPlayCounts(updatedPlayCounts);
+      } else {
+        console.error("Failed to increment play count.");
+      }
+    } catch (error) {
+      console.error("An error occurred:", error);
+    }
+  };
 
   const handleToggleFavorite = () => {
     if (isFavorited) {
-      // If it's already favorited, do nothing
       return;
     }
-    addSongToFavorites(music.id, music.title, music.artistId); // Call the function to add the song to favorites
-    setIsFavorited(true); // Update the local state to indicate that it's favorited
+    addSongToFavorites(music.id, music.title, music.artistId);
+    setIsFavorited(true);
   };
 
   const handleMusicSelect = (music) => {
@@ -91,10 +106,9 @@ const addSongToFavorites = async (songId, title, songTitle) => {
 
     audioElement.addEventListener("timeupdate", updateProgress);
 
-    // Listen for the "ended" event to detect when the song finishes playing
     audioElement.addEventListener("ended", () => {
       handleSongEnd();
-      incrementPlayCount(selectedMusic.id); // Increment play count when the song ends
+      incrementPlayCountOnServer(selectedMusic.id);
     });
 
     const cdImageElement = cdImageRef.current;
@@ -138,31 +152,29 @@ const addSongToFavorites = async (songId, title, songTitle) => {
     if (cdImageElement) {
       cdImageElement.style.animation = "none";
     }
+
+    if (selectedMusic) {
+      incrementPlayCountOnServer(selectedMusic.id);
+    }
   };
 
+  // Load playCounts from localStorage when the component mounts
   useEffect(() => {
-    // Load play counts from localStorage
     const storedPlayCounts =
       JSON.parse(localStorage.getItem("playCounts")) || {};
     setPlayCounts(storedPlayCounts);
   }, []);
 
+  // Save playCounts to localStorage whenever it changes
   useEffect(() => {
-    // Save play counts to localStorage whenever it changes
     localStorage.setItem("playCounts", JSON.stringify(playCounts));
   }, [playCounts]);
 
+  // Load favorites from localStorage when the component mounts
   useEffect(() => {
-    // Load favorites from localStorage
     const storedFavorites = JSON.parse(localStorage.getItem("favorites")) || {};
     setFavorites(storedFavorites);
   }, []);
-
-  const incrementPlayCount = (songId) => {
-    const newPlayCounts = { ...playCounts };
-    newPlayCounts[songId] = (newPlayCounts[songId] || 0) + 1;
-    setPlayCounts(newPlayCounts);
-  };
 
   return (
     <div>
@@ -216,8 +228,8 @@ const addSongToFavorites = async (songId, title, songTitle) => {
               <td>{music.year}</td>
               <td>
                 <Button color="link" onClick={handleToggleFavorite}>
-                {favorites[music.id] ? (
-                    <FaHeart color="red" />
+                  {favorites[music.id] ? (
+                    <FaRegHeart color="red" />
                   ) : (
                     <FaHeart />
                   )}

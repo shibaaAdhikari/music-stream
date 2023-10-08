@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import { RecoilRoot } from "recoil";
 import { AlbumDataProvider } from "./Components/MusicPlayer/MusicPlayer";
 import { AlbumAdminDataProvider } from "./Pages/Admin/AlbumDataContext";
+import { TrendingSongsProvider } from "./Components/TrendingContext/TrendingSongsContext"; // Import your TrendingSongsProvider
+
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
@@ -14,7 +16,9 @@ root.render(
       <RecoilRoot>
         <AlbumAdminDataProvider>
           <AlbumDataProvider>
-            <App />
+            <TrendingSongsProvider> 
+              <App />
+            </TrendingSongsProvider>
           </AlbumDataProvider>
         </AlbumAdminDataProvider>
       </RecoilRoot>
@@ -22,7 +26,4 @@ root.render(
   </BrowserRouter>
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
