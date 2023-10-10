@@ -16,29 +16,31 @@ const musics = selector({
   },
 });
 
-const songsSelector = selector({
-  key: "songs",
-  get: async () => {
-    try {
-      const response = await axios.get(url1);
-      return response.data;
-    } catch (error) {
-      throw error;
-    }
-  },
-});
+// const songsSelector = selector({
+//   key: "songs",
+//   get: async () => {
+//     try {
+//       const response = await axios.get(url1);
+//       return response.data;
+//     } catch (error) {
+//       throw error;
+//     }
+//   },
+// });
 
-const PlayListSelector = selector({
-  key: "playlist",
-  get: () => {
-    return SpotifyPlaylist.spotifyPlaylist.map((item) => ({
-      id: item.id,
-      title: item.title,
-      subTitle: item.subTitle || item.subtitle,
-      image: item.image,
-      backgroundColor: item.backgroundColor || "defaultBackgroundColor",
-    }));
-  },
-});
+// const PlayListSelector = selector({
+//   key: "playlist",
+//   get: () => {
+//     return SpotifyPlaylist.spotifyPlaylist.map((item) => ({
+//       id: item.id,
+//       title: item.title,
+//       subTitle: item.subTitle || item.subtitle,
+//       image: item.image,
+//       backgroundColor: item.backgroundColor || "defaultBackgroundColor",
+//     }));
+//   },
+// });
 
-export { musics, PlayListSelector, songsSelector };
+
+
+export { musics};

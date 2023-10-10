@@ -23,9 +23,9 @@ const SidenavBar = ({ children }) => {
       name: "Features",
     },
     {
-      path: "/Playlist",
+      path: "/Trending",
       icon: <TbSquarePlus />,
-      name: "Playlist",
+      name: "Trending Songs",
     },
     {
       path: "/LikedSong",
