@@ -4,6 +4,7 @@ import { Button, Form, Label, Input, Navbar, NavbarBrand } from "reactstrap";
 import { useNavigate } from "react-router-dom";
 import "./Login.css";
 import music from "../../Assests/music3.png";
+import { useUserContext } from "./UserContext";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -11,45 +12,91 @@ const Login = () => {
   const [role, setRole] = useState(""); // State to store the selected role
   const navigate = useNavigate();
   const [error, setError] = useState(""); // State for error messages
+  const { setUserRole } = useUserContext();
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://127.0.0.1:3000/api/accounts/signin",
+  //       {
+  //         username: email,
+  //         password,
+  //         role,
+  //       }
+  //     );
+
+  //     if (response.status === 200) {
+  //       const userData = response.data;
+  //       const userId = userData.id;
+
+  //       localStorage.setItem("username", email);
+
+  //       if (email === "admin") {
+  //         navigate("/audioUpload");
+  //       } else {
+  //         navigate("/");
+  //       }
+  //       setError("");
+  //     } else {
+  //       const errorMessage =
+  //         response.data.message ||
+  //         "Login failed. Please check your credentials.";
+  //       setError(errorMessage);
+  //     }
+
+  //   } catch (error) {
+  //     console.error(error);
+  //     setError("Login failed. Please check your credentials.");
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post(
         "http://127.0.0.1:3000/api/accounts/signin",
         {
           username: email,
           password,
-          role, // Include the role in the request body
+          role,
         }
       );
-
+  
       if (response.status === 200) {
         const userData = response.data;
         const userId = userData.id;
-
+  
         localStorage.setItem("username", email);
-
-        if (email === "admin") {
-          navigate("/audioUpload");
+        setUserRole(role);
+        if (role === "artist") {
+          navigate("/admin");
         } else {
           navigate("/");
         }
         setError("");
       } else {
-        const errorMessage =
-          response.data.message ||
-          "Login failed. Please check your credentials.";
-        setError(errorMessage);
+        const errorMessage = response.data.message || "Login failed. Please check your credentials.";
+  
+        if (errorMessage.includes("User not found")) {
+          setError("Username not found.");
+        } else if (errorMessage.includes("Invalid credentials")) {
+          setError("Password incorrect.");
+        } else if (errorMessage.includes("Role does not match")) {
+          setError("Role does not match.");
+        } else {
+          setError("Login failed. Please check your credentials.");
+        }
       }
-
     } catch (error) {
       console.error(error);
       setError("Login failed. Please check your credentials.");
     }
   };
+  
+  
 
 
 

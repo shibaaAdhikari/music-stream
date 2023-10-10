@@ -8,7 +8,7 @@ import { RecoilRoot } from "recoil";
 import { AlbumDataProvider } from "./Components/MusicPlayer/MusicPlayer";
 import { AlbumAdminDataProvider } from "./Pages/Admin/AlbumDataContext";
 import { TrendingSongsProvider } from "./Components/TrendingContext/TrendingSongsContext"; // Import your TrendingSongsProvider
-
+import { UserProvider } from "./Pages/login/UserContext";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
@@ -17,7 +17,9 @@ root.render(
         <AlbumAdminDataProvider>
           <AlbumDataProvider>
             <TrendingSongsProvider> 
+              <UserProvider>
               <App />
+              </UserProvider>   
             </TrendingSongsProvider>
           </AlbumDataProvider>
         </AlbumAdminDataProvider>

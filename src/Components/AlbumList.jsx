@@ -28,9 +28,44 @@ const AlbumList = () => {
   const cdImageRef = useRef(null);
   const album = useAlbumData();
 
+  // const addSongToFavorites = async (songId, title, songTitle) => {
+  //   const username = localStorage.getItem("username"); // Assuming the username is stored in localStorage
+
+  //   try {
+  //     const response = await axios.post(
+  //       `http://localhost:3000/api/favourites/addtofavourites/${songId}`,
+  //       { username, title, songTitle },
+  //       {
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //         },
+  //       }
+  //     );
+
+  //     if (response.status === 200) {
+  //       console.log("Song added to favorites!");
+  //     } else {
+  //       console.error("Failed to add song to favorites.");
+  //     }
+  //   } catch (error) {
+  //     console.error("An error occurred:", error);
+  //   }
+
+  //   setIsFavorited(true);
+
+  //   const updatedFavorites = { ...favorites };
+  //   updatedFavorites[songId] = music;
+  //   localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
+  // };
   const addSongToFavorites = async (songId, title, songTitle) => {
     const username = localStorage.getItem("username"); // Assuming the username is stored in localStorage
-
+  
+    // Check if the song is already in favorites
+    if (favorites[songId]) {
+      alert("This song is already in your favorites!");
+      return;
+    }
+  
     try {
       const response = await axios.post(
         `http://localhost:3000/api/favourites/addtofavourites/${songId}`,
@@ -41,22 +76,24 @@ const AlbumList = () => {
           },
         }
       );
-
+  
       if (response.status === 200) {
+        alert("Added to favourites");
         console.log("Song added to favorites!");
+        setIsFavorited(true); // Set isFavorited to true when the song is added to favorites
       } else {
         console.error("Failed to add song to favorites.");
       }
     } catch (error) {
       console.error("An error occurred:", error);
     }
-
-    setIsFavorited(true);
-
+  
     const updatedFavorites = { ...favorites };
     updatedFavorites[songId] = music;
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
+  
+  
 
   const incrementPlayCountOnServer = async (songId) => {
     try {
